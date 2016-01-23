@@ -1,0 +1,31 @@
+{
+  "name": "app-gobelins",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "npm run stylus & npm run budo",
+    "budo": "budo src/main.js:build/js/app.js --live --dir ./public --open -- -t [babelify --presets [ es2015 react ] aliasify]",
+    "stylus": "stylus -w src/stylus/main.styl -o public/build/css/style.css",
+    "prebuild": "rm -r ../www/ & mkdir ../www & cp -R public/ ../www"
+  },
+  "author": "Adrien Lavisiera <adrienl@outlook.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "aliasify": "^1.8.0",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babelify": "^7.2.0",
+    "browserify": "^12.0.1",
+    "budo": "^6.0.4",
+    "onchange": "^2.0.0",
+    "uglify": "^0.1.5"
+  },
+  "aliasify": "./src/config/aliasifyConfig.js",
+  "dependencies": {
+    "history": "^1.17.0",
+    "react": "^0.14.6",
+    "react-dom": "^0.14.6",
+    "react-router": "^1.0.3"
+  }
+}
