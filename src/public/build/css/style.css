@@ -147,6 +147,78 @@ input,
 select {
   vertical-align: middle;
 }
+html,
 body {
+  width: 100%;
+  height: 100%;
   background-color: #fff;
+}
+#layout {
+  width: 100%;
+  height: 100%;
+}
+#login {
+  width: 100%;
+  height: 100%;
+  background-color: #22378a;
+  text-align: center;
+}
+#login .logo {
+  position: relative;
+  width: 50%;
+  margin-top: 50%;
+}
+#login .loginMenu {
+  margin-top: 25%;
+}
+#login .loginMenu button {
+  margin-bottom: 30px;
+  color: #fff;
+  background: none;
+  border: none;
+  font-size: 14px;
+  opacity: 0;
+}
+#login .loginMenu button:last-of-type {
+  margin-bottom: 0px;
+}
+#login .signInInput {
+  position: relative;
+  top: -80px;
+}
+#login .signInInput input {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #fff;
+  background: none;
+  border: none;
+  height: 30px;
+  font-size: 14px;
+  opacity: 0;
+}
+#login .signInInput input::-webkit-input-placeholder {
+  color: #fff;
+  font-size: 14px;
+  padding-bottom: 16px;
+}
+#login .signInInput input:-moz-placeholder {
+  color: #fff;
+  font-size: 14px;
+  padding-bottom: 16px;
+}
+#login .signInInput input::-moz-placeholder {
+  color: #fff;
+  font-size: 14px;
+  padding-bottom: 16px;
+}
+#login .signInInput input:-ms-input-placeholder {
+  color: #fff;
+  font-size: 14px;
+  padding-bottom: 16px;
+}
+#login .signInInput input:focus {
+  outline: none;
+}
+#login .signInInput inputlast-of-type {
+  margin-bottom: 0px;
 }

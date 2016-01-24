@@ -12,6 +12,14 @@ import { Router, Route, browserHistory, Link } from 'react-router';
 // Core
 
 export default class Layout extends React.Component {
+	constructor(props) {
+		super(props);
+		console.log(this.props)
+	}
+
+	componentDidMount() {
+        //  This method is called when an instance of this component is created.
+    }
 
 	render() {
 

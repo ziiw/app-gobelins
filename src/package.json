@@ -27,6 +27,7 @@
   },
   "aliasify": "./src/config/aliasifyConfig.js",
   "dependencies": {
+    "gsap": "^1.18.2",
     "history": "^1.17.0",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
