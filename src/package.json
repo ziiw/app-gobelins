@@ -7,8 +7,11 @@
     "start": "npm run stylus & npm run budo",
     "budo": "budo src/main.js:build/js/app.js --live --dir ./public --open -- -t [babelify --presets [ es2015 react ] aliasify]",
     "stylus": "stylus -w src/stylus/main.styl -o public/build/css/style.css",
-    "prebuild": "rm -r ../www/ & mkdir ../www & cp -R public/ ../www",
-    "cordova": "npm run prebuild & cd ../ & cordova build"
+    "build-js": "browserify src/main.js -o public/build/js/app.js -t [babelify --presets [ es2015 react ] aliasify]",
+    "clean": "rm -r ../www/ && mkdir ../www",
+    "copy": "cp -R public/ ../www",
+    "cordova": "cd ../ && cordova build",
+    "build": "npm run build-js && npm run clean && npm run copy && npm run cordova"
   },
   "author": "Adrien Lavisiera <adrienl@outlook.com>",
   "license": "MIT",
