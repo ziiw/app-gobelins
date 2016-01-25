@@ -166,7 +166,10 @@ body {
 #login .logo {
   position: relative;
   width: 50%;
+  max-width: 490px;
   margin-top: 50%;
+  -webkit-transform: translate(0%, -50%);
+          transform: translate(0%, -50%);
 }
 #login .loginMenu {
   margin-top: 25%;

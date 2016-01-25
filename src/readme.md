@@ -8,7 +8,7 @@ I don't use tasks runners because I don't really need them. I used to use Gulp f
 
 ### First lunch
 Installation needed for compilation:
-`npm install -g browserify uglify stylus` 
+`npm install -g browserify uglify stylus autoprefixer-stylus` 
 
 Run:
 `npm start`

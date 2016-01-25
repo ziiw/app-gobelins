@@ -32,7 +32,7 @@ export default class Login extends React.Component {
 
 	animEntry() {
 		TweenMax.to(this.refs.logo, 1.5, {
-			y: -50,
+			y: -30,
 			ease: Power4.easeInOut
 		});
 

@@ -2,5 +2,5 @@ www/
 platforms/
 plugins/
 src/node_modules
-src/public/build/css/
 src/public/build/js/
+src/public/build/css/
