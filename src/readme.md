@@ -13,6 +13,9 @@ Installation needed for compilation:
 Run:
 `npm start`
 
+### Build cordova
+`npm run build`
+
 ### Todo
 * Stylus minimal configuration :soon:
 * React Router :soon:

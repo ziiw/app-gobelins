@@ -10,17 +10,18 @@ import TweenMax from 'gsap';
 
 // -----------------------------
 // Core
+//
+// TODO: Define timelines for all animations
 
 export default class Login extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {signIn: false};
+		this.state = {signIn: false, signUp: false, form: false};
 	}
 
 	componentDidMount() {
         //  This method is called when an instance of this component is created.
-        this.setState({signIn: false});
         this.showSplash();
     }
 
@@ -51,11 +52,27 @@ export default class Login extends React.Component {
 		});
 	}
 
-	showSignIn(e) {
-		console.log(e);
-		this.setState({signIn: true});
+	showSignIn() {
+		console.log("signIn");
+		this.setState({signIn: true, form: true});
 
+		// Hide button menuLogin
+		TweenMax.to(this.refs.btnSignIn, 0.75, {
+			y: -30,
+			opacity: 0,
+			ease: Power4.easeOut
+		});
+
+		TweenMax.to(this.refs.btnSignUp, 0.5, {
+			delay: 0.25,
+			y: -30,
+			opacity: 0,
+			ease: Power4.easeOut
+		});
+
+		// Show signIn form
 		TweenMax.to(this.refs.inputEmail, 0.75, {
+			delay: 0.25,
 			y: -25,
 			opacity: 1,
 			ease: Power4.easeOut
@@ -67,19 +84,37 @@ export default class Login extends React.Component {
 			opacity: 1,
 			ease: Power4.easeOut
 		});
+
+		TweenMax.to(this.refs.btnForm, 0.75, {
+			delay: 0.25,
+			opacity: 1,
+			ease: Power4.easeOut
+		});
+	}
+
+	showSignUp() {
+		console.log("signup");
+
+		this.setState({signUp: true, form: true});
 	}
 
 	render() {
+		var handleSignIn = this.showSignIn.bind(this);
+		var handleSignUp = this.showSignIn.bind(this);
 		return (
 			<div id="login">
 				<img src="assets/login/logo.png" className="logo" ref="logo"/>
 				<div ref="loginMenu" className="loginMenu">
-					<button ref="btnSignIn" onClick={this.showSignIn}>SE CONNECTER</button><br />
-					<button ref="btnSignUp" onClick={this.showSignUp}>CRÉER UN COMPTE</button>
+					<button ref="btnSignIn" onClick={handleSignIn}>SE CONNECTER</button><br />
+					<button ref="btnSignUp" onClick={handleSignUp}>CRÉER UN COMPTE</button>
 				</div>
 				<div ref="signInInput" className="signInInput">
 					<input ref="inputEmail" type="text" disabled={!this.state.signIn} placeholder="ADRESSE EMAIL" /><br />
 					<input ref="inputPass" type="password" disabled={!this.state.signIn} placeholder="MOT DE PASSE" />
+				</div>
+				<div ref="btnForm" className="btnForm">
+					<input ref="btnCancel" className="btnCancel" type="button" disabled={!this.state.form} value="RETOUR" />
+					<input ref="btnValid" className="btnValid" type="button" disabled={!this.state.form} value="VALIDER" />
 				</div>
 		  	</div>
 		);
