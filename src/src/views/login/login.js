@@ -11,7 +11,7 @@ import TweenMax from 'gsap';
 // -----------------------------
 // Core
 //
-// TODO: Define timelines for all animations
+// TODO: Define timelines for all animations WIP
 
 export default class Login extends React.Component {
 	constructor(props) {
@@ -23,6 +23,20 @@ export default class Login extends React.Component {
 	componentDidMount() {
         //  This method is called when an instance of this component is created.
         this.showSplash();
+
+        // Set form animation
+        this.tlSignIn = new TimelineMax({paused: true})
+		this.tlSignIn
+			.addLabel("btnSignIn")
+			.addLabel("btnSignUp", "+0.25")
+			.addLabel("inputEmail", "+0.25")
+			.addLabel("inputPass", "+0.5")
+			.addLabel("btnForm")
+			.to(this.refs.btnSignIn, 0.75, {y: -30, opacity: 0, ease: Power4.easeInOut}, "btnSignIn")
+			.to(this.refs.btnSignUp, 0.5, {y: -30, opacity: 0, ease: Power4.easeInOut}, "btnSignUp")
+			.to(this.refs.btnForm, 1, {opacity: 1, ease: Power4.easeInOut}, "btnForm")
+			.to(this.refs.inputEmail, 0.75, {y: -25, opacity: 1, ease: Power4.easeOut}, "inputEmail")
+			.to(this.refs.inputPass, 0.5, {y: -25, opacity: 1, ease: Power4.easeOut}, "inputPass")
     }
 
     showSplash() {
@@ -52,44 +66,17 @@ export default class Login extends React.Component {
 		});
 	}
 
+	backMenu() {
+		this.state = {signIn: false, signUp: false, form: false};
+
+		this.tlSignIn.reverse();
+	}
+
 	showSignIn() {
 		console.log("signIn");
 		this.setState({signIn: true, form: true});
 
-		// Hide button menuLogin
-		TweenMax.to(this.refs.btnSignIn, 0.75, {
-			y: -30,
-			opacity: 0,
-			ease: Power4.easeOut
-		});
-
-		TweenMax.to(this.refs.btnSignUp, 0.5, {
-			delay: 0.25,
-			y: -30,
-			opacity: 0,
-			ease: Power4.easeOut
-		});
-
-		// Show signIn form
-		TweenMax.to(this.refs.inputEmail, 0.75, {
-			delay: 0.25,
-			y: -25,
-			opacity: 1,
-			ease: Power4.easeOut
-		});
-
-		TweenMax.to(this.refs.inputPass, 0.5, {
-			delay: 0.5,
-			y: -25,
-			opacity: 1,
-			ease: Power4.easeOut
-		});
-
-		TweenMax.to(this.refs.btnForm, 0.75, {
-			delay: 0.25,
-			opacity: 1,
-			ease: Power4.easeOut
-		});
+		this.tlSignIn.play();
 	}
 
 	showSignUp() {
@@ -101,6 +88,8 @@ export default class Login extends React.Component {
 	render() {
 		var handleSignIn = this.showSignIn.bind(this);
 		var handleSignUp = this.showSignIn.bind(this);
+
+		var handleBack = this.backMenu.bind(this);
 		return (
 			<div id="login">
 				<img src="assets/login/logo.png" className="logo" ref="logo"/>
@@ -113,7 +102,7 @@ export default class Login extends React.Component {
 					<input ref="inputPass" type="password" disabled={!this.state.signIn} placeholder="MOT DE PASSE" />
 				</div>
 				<div ref="btnForm" className="btnForm">
-					<input ref="btnCancel" className="btnCancel" type="button" disabled={!this.state.form} value="RETOUR" />
+					<input ref="btnCancel" className="btnCancel" onClick={handleBack} type="button" disabled={!this.state.form} value="RETOUR" />
 					<input ref="btnValid" className="btnValid" type="button" disabled={!this.state.form} value="VALIDER" />
 				</div>
 		  	</div>
