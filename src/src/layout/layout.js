@@ -14,7 +14,6 @@ import { Router, Route, browserHistory, Link } from 'react-router';
 export default class Layout extends React.Component {
 	constructor(props) {
 		super(props);
-		console.log(this.props)
 	}
 
 	componentDidMount() {

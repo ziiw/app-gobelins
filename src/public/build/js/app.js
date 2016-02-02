@@ -31002,6 +31002,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 // -----------------------------
 // Core
+//
+// TODO: Define timelines for all animations WIP
 
 var Login = (function (_React$Component) {
 	_inherits(Login, _React$Component);
@@ -31011,29 +31013,46 @@ var Login = (function (_React$Component) {
 
 		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Login).call(this, props));
 
-		_this.state = { signIn: false };
+		_this.state = { connected: false, signIn: false, signUp: false, form: false };
 		return _this;
 	}
 
 	_createClass(Login, [{
 		key: "componentDidMount",
 		value: function componentDidMount() {
-			//  This method is called when an instance of this component is created.
-			this.setState({ signIn: false });
+			//  This method is called whxen an instance of this component is created.
+			this.setAnims();
 			this.showSplash();
+		}
+	}, {
+		key: "setAnims",
+		value: function setAnims() {
+			// Set signIn animation
+			this.tlSignIn = new TimelineMax({ paused: true });
+			this.tlSignIn.addLabel("btnSignIn").addLabel("btnSignUp", "+0.25").addLabel("inputEmail", "+0.25").addLabel("inputPass", "+0.5").addLabel("btnForm").to(this.refs.loginMenu, 0.1, { css: { "z-index": 100 } }).to(this.refs.signInInput, 0.1, { css: { "z-index": 1000 } }).to(this.refs.btnSignIn, 0.75, { y: -35, opacity: 0, ease: Power4.easeInOut }, "btnSignIn").to(this.refs.btnSignUp, 0.5, { y: -35, opacity: 0, ease: Power4.easeInOut }, "btnSignUp").to(this.refs.btnForm, 1, { opacity: 1, ease: Power4.easeInOut }, "btnForm").to(this.refs.inputEmail, 0.75, { y: -30, opacity: 1, ease: Power4.easeOut }, "inputEmail").to(this.refs.inputPass, 0.5, { y: -30, opacity: 1, ease: Power4.easeOut }, "inputPass");
+
+			var top = this.refs.logo.offsetTop;
+			var listInputs = document.querySelectorAll(".signUpInput input");
+
+			// Set signUp animation
+			this.tlSignUp = new TimelineMax({ paused: true });
+			this.tlSignUp.addLabel("logo").addLabel("btnSignIn").addLabel("btnSignUp", "+0.25").addLabel("btnForm", "+0.25").addLabel("inputs", "+0.5").to(this.refs.logo, 1, { y: -top, scaleX: 0.6, scaleY: 0.6, ease: Power4.easeInOut }, "logo") // css:{top: "120px", width: "100px"}
+			.to(this.refs.btnSignIn, 0.75, { y: -35, opacity: 0, ease: Power4.easeInOut }, "btnSignIn").to(this.refs.btnSignUp, 0.5, { y: -35, opacity: 0, ease: Power4.easeInOut }, "btnSignUp").to(this.refs.btnForm, 1, { opacity: 1, ease: Power4.easeInOut }, "btnForm").staggerTo(listInputs, 0.75, { y: -35, opacity: 1, ease: Power4.easeOut }, 0.08, "inputs");
 		}
 	}, {
 		key: "showSplash",
 		value: function showSplash() {
 
-			// Only if not already connected else go to home
-			this.animEntry();
+			if (this.state.connected) {} else {
+				// Only if not already connected else go to home
+				this.animEntry();
+			}
 		}
 	}, {
 		key: "animEntry",
 		value: function animEntry() {
 			_gsap2.default.to(this.refs.logo, 1.5, {
-				y: -50,
+				y: -30,
 				ease: Power4.easeInOut
 			});
 
@@ -31052,27 +31071,38 @@ var Login = (function (_React$Component) {
 			});
 		}
 	}, {
+		key: "backMenu",
+		value: function backMenu() {
+
+			if (this.state.signIn) {
+				// If come back from signIn
+				this.tlSignIn.reverse();
+			} else {
+				// If come back from signUp
+				this.tlSignUp.reverse();
+			}
+
+			this.state = { signIn: false, signUp: false, form: false };
+		}
+	}, {
 		key: "showSignIn",
-		value: function showSignIn(e) {
-			console.log(e);
-			this.setState({ signIn: true });
-
-			_gsap2.default.to(this.refs.inputEmail, 0.75, {
-				y: -25,
-				opacity: 1,
-				ease: Power4.easeOut
-			});
-
-			_gsap2.default.to(this.refs.inputPass, 0.5, {
-				delay: 0.5,
-				y: -25,
-				opacity: 1,
-				ease: Power4.easeOut
-			});
+		value: function showSignIn() {
+			this.setState({ signIn: true, form: true });
+			this.tlSignIn.play();
+		}
+	}, {
+		key: "showSignUp",
+		value: function showSignUp() {
+			this.setState({ signUp: true, form: true });
+			this.tlSignUp.play();
 		}
 	}, {
 		key: "render",
 		value: function render() {
+			var handleSignIn = this.showSignIn.bind(this);
+			var handleSignUp = this.showSignUp.bind(this);
+			var handleBack = this.backMenu.bind(this);
+
 			return _react2.default.createElement(
 				"div",
 				{ id: "login" },
@@ -31082,13 +31112,13 @@ var Login = (function (_React$Component) {
 					{ ref: "loginMenu", className: "loginMenu" },
 					_react2.default.createElement(
 						"button",
-						{ ref: "btnSignIn", onClick: this.showSignIn },
+						{ ref: "btnSignIn", onClick: handleSignIn },
 						"SE CONNECTER"
 					),
 					_react2.default.createElement("br", null),
 					_react2.default.createElement(
 						"button",
-						{ ref: "btnSignUp", onClick: this.showSignUp },
+						{ ref: "btnSignUp", onClick: handleSignUp },
 						"CRÉER UN COMPTE"
 					)
 				),
@@ -31098,6 +31128,35 @@ var Login = (function (_React$Component) {
 					_react2.default.createElement("input", { ref: "inputEmail", type: "text", disabled: !this.state.signIn, placeholder: "ADRESSE EMAIL" }),
 					_react2.default.createElement("br", null),
 					_react2.default.createElement("input", { ref: "inputPass", type: "password", disabled: !this.state.signIn, placeholder: "MOT DE PASSE" })
+				),
+				_react2.default.createElement(
+					"div",
+					{ ref: "signUpInput", className: "signUpInput" },
+					_react2.default.createElement("input", { ref: "inputLastname", type: "text", disabled: !this.state.signUp, placeholder: "NOM" }),
+					_react2.default.createElement("br", null),
+					_react2.default.createElement("input", { ref: "inputFirstname", type: "text", disabled: !this.state.signUp, placeholder: "PRÉNOM" }),
+					_react2.default.createElement("br", null),
+					_react2.default.createElement("input", { ref: "inputPhoto", type: "text", disabled: !this.state.signUp, placeholder: "PHOTO" }),
+					_react2.default.createElement("br", null),
+					_react2.default.createElement("input", { ref: "inputEmailSignUp", type: "text", disabled: !this.state.signUp, placeholder: "ADRESSE EMAIL" }),
+					_react2.default.createElement("br", null),
+					_react2.default.createElement("input", { ref: "inputPassSignUp", type: "password", disabled: !this.state.signUp, placeholder: "MOT DE PASSE" }),
+					_react2.default.createElement("input", { ref: "inputPhone", type: "text", disabled: !this.state.signUp, placeholder: "TÉLÉPHONE" }),
+					_react2.default.createElement("br", null),
+					_react2.default.createElement("input", { ref: "inputPromo", type: "text", disabled: !this.state.signUp, placeholder: "FORMATION / PROMO" }),
+					_react2.default.createElement("br", null),
+					_react2.default.createElement("input", { ref: "inputCity", type: "text", disabled: !this.state.signUp, placeholder: "VILLE" }),
+					_react2.default.createElement("br", null),
+					_react2.default.createElement("input", { ref: "inputJob", type: "text", disabled: !this.state.signUp, placeholder: "MÉTIER" }),
+					_react2.default.createElement("br", null),
+					_react2.default.createElement("input", { ref: "inputWeb", type: "text", disabled: !this.state.signUp, placeholder: "SITE WEB / BLOG" }),
+					_react2.default.createElement("br", null)
+				),
+				_react2.default.createElement(
+					"div",
+					{ ref: "btnForm", className: "btnForm" },
+					_react2.default.createElement("input", { ref: "btnCancel", className: "btnCancel", onClick: handleBack, type: "button", disabled: !this.state.form, value: "RETOUR" }),
+					_react2.default.createElement("input", { ref: "btnValid", className: "btnValid", type: "button", disabled: !this.state.form, value: "VALIDER" })
 				)
 			);
 		}
