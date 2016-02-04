@@ -10,8 +10,6 @@ import TweenMax from 'gsap'
 
 // -----------------------------
 // Core
-//
-// TODO: Define timelines for all animations WIP
 
 export default class Login extends React.Component {
 
@@ -19,9 +17,6 @@ export default class Login extends React.Component {
 		super(props)
 
 		this.state = {connected: Utils.auth.loggedIn(), signIn: false, signUp: false, form: false}
-
-		// Get the router
-		context.Router
 
 		this.updateAuth = this.updateAuth.bind(this)
 	}
