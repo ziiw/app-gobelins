@@ -1,15 +1,16 @@
 // -----------------------------
 // Imports
 
-import {Utils as Utils} from "../../utils";
-import React from "react";
-import { Router, Route, browserHistory, Link } from 'react-router';
+import {Utils as Utils} from "../../utils"
+import React from "react"
+import { Router, Route, browserHistory, Link } from 'react-router'
 
 
 
 // -----------------------------
 // Components
 
+import BarMenu from "../../components/bar-menu.js"
 
 
 
@@ -30,6 +31,7 @@ export default class Home extends React.Component {
   	render() {
     	return (
     		<div id="home">
+    			<BarMenu title="Annonces" />
       			<h1>Home</h1>
       			<Link to='/users'>Users</Link>
       		</div>
