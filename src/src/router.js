@@ -7,10 +7,12 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 
 
+
 // -----------------------------
 // Layout
 
 import Layout from "./layout/layout";
+
 
 
 
@@ -20,6 +22,8 @@ import Layout from "./layout/layout";
 import Login from './views/login/login';
 import Home from './views/home/home';
 import Single from './views/single/single';
+import Add from './views/add/add';
+
 
 
 
@@ -28,21 +32,23 @@ import Single from './views/single/single';
 
 export default class Root extends React.Component {
 
-  requireAuth(nextState, replace) {
-    if (!Utils.auth.loggedIn()) {
-      replace(nextState.location.pathname, '/'); 
-    }
-  }
+    requireAuth(nextState, replace) {
+        if (!Utils.auth.loggedIn()) {
+            replace(nextState.location.pathname, '/');
 
-  render() {
-    return (
-      <Router history={browserHistory}>
-        <Route path="/" component={Layout}>
-          <IndexRoute component={Login} />
-          <Route path="home" component={Home} onEnter={this.requireAuth}/>
-          <Route path="single" component={Single} />
-        </Route>
-      </Router>
-    );
-  }
+        }
+    }
+
+    render() {
+        return (
+            <Router history={browserHistory}>
+                <Route path="/" component={Layout}>
+                    <IndexRoute component={Login}/>
+                    <Route path="home" component={Home} onEnter={this.requireAuth}/>
+                    <Route path="single" component={Single}/>
+                    <Route path="add" component={Add}/>
+                </Route>
+            </Router>
+        );
+    }
 }

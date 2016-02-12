@@ -27,13 +27,19 @@ export default class BarMenu extends React.Component {
 
     }
 
+	showAdd() {
+        this.props.history.push("/add")
+	}
+
     render() {
+		let showAdd = this.showAdd.bind(this);
+
       	return (
       		<div id="barMenu">
                 <div className="content">
                     <div className="menu"></div>
                     <h1>{this.props.title}</h1>
-                    <div className="btnAdd"></div>
+                    <div className="btnAdd" onClick={showAdd}></div>
                 </div>
         	</div>
       	);

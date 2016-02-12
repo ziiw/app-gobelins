@@ -32,8 +32,8 @@ export default class Home extends React.Component {
 	componentDidMount() {
         //  This method is called whxen an instance of this component is created.
         //this.firebaseRef = new Firebase("https://shining-torch-7702.firebaseio.com/");
+        //
         //this.firebaseRef.on("child_added", function(dataSnapshot) {
-        //    console.log(dataSnapshot.val())
         //    this.ads.push(dataSnapshot.val())
         //    this.setState({
         //        ads: this.ads
@@ -46,7 +46,6 @@ export default class Home extends React.Component {
     }
 
     showSingle() {
-        console.log("dssdf")
         this.props.history.push('/single')
     }
 
@@ -75,9 +74,11 @@ export default class Home extends React.Component {
     		<div id="home">
     			<BarMenu title="Annonces" />
 
-                {this.ads.map(function(ad, index) {
-                    return <Ad key={index} data={ad} onClick={handleClick} />
-                })}
+                <div className="ads">
+                    {this.ads.map(function(ad, index) {
+                        return <Ad key={index} data={ad} onClick={handleClick} />
+                    })}
+                </div>
       		</div>
     	);
   	}
