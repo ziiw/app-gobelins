@@ -148,6 +148,136 @@ select {
   outline: none;
   vertical-align: middle;
 }
+@font-face {
+  font-family: 'Montserrat-Bold';
+  src: url("../../assets/fonts/montserrat-bold-webfont.eot");
+  src: url("../../assets/fonts/montserrat-bold-webfont.eot?#iefix") format('embedded-opentype'), url("../../assets/fonts/montserrat-bold-webfont.woff") format('woff'), url("../../assets/fonts/montserrat-bold-webfont.ttf") format('truetype'), url("../../assets/fonts/montserrat-bold-webfont.svg#Montserrat-Bold") format('svg');
+  font-weight: 'normal';
+  font-style: normal;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  @font-face {
+    font-family: 'Montserrat-Bold';
+    src: url("../../assets/fonts/montserrat-bold-webfont.svg#Montserrat-Bold") format('svg');
+  }
+}
+@font-face {
+  font-family: 'Montserrat-Black';
+  src: url("../../assets/fonts/montserrat-black-webfont.eot");
+  src: url("../../assets/fonts/montserrat-black-webfont.eot?#iefix") format('embedded-opentype'), url("../../assets/fonts/montserrat-black-webfont.woff") format('woff'), url("../../assets/fonts/montserrat-black-webfont.ttf") format('truetype'), url("../../assets/fonts/montserrat-black-webfont.svg#Montserrat-Black") format('svg');
+  font-weight: 'normal';
+  font-style: normal;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  @font-face {
+    font-family: 'Montserrat-Black';
+    src: url("../../assets/fonts/montserrat-black-webfont.svg#Montserrat-Black") format('svg');
+  }
+}
+@font-face {
+  font-family: 'Montserrat-Regular';
+  src: url("../../assets/fonts/montserrat-regular-webfont.eot");
+  src: url("../../assets/fonts/montserrat-regular-webfont.eot?#iefix") format('embedded-opentype'), url("../../assets/fonts/montserrat-regular-webfont.woff") format('woff'), url("../../assets/fonts/montserrat-regular-webfont.ttf") format('truetype'), url("../../assets/fonts/montserrat-regular-webfont.svg#Montserrat-Regular") format('svg');
+  font-weight: 'normal';
+  font-style: normal;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  @font-face {
+    font-family: 'Montserrat-Regular';
+    src: url("../../assets/fonts/montserrat-regular-webfont.svg#Montserrat-Regular") format('svg');
+  }
+}
+@font-face {
+  font-family: 'Montserrat-Light';
+  src: url("../../assets/fonts/montserrat-light-webfont.eot");
+  src: url("../../assets/fonts/montserrat-light-webfont.eot?#iefix") format('embedded-opentype'), url("../../assets/fonts/montserrat-light-webfont.woff") format('woff'), url("../../assets/fonts/montserrat-light-webfont.ttf") format('truetype'), url("../../assets/fonts/montserrat-light-webfont.svg#Montserrat-Light") format('svg');
+  font-weight: 'normal';
+  font-style: normal;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  @font-face {
+    font-family: 'Montserrat-Light';
+    src: url("../../assets/fonts/montserrat-light-webfont.svg#Montserrat-Light") format('svg');
+  }
+}
+@font-face {
+  font-family: 'Montserrat-Hairline';
+  src: url("../../assets/fonts/montserrat-hairline-webfont.eot");
+  src: url("../../assets/fonts/montserrat-hairline-webfont.eot?#iefix") format('embedded-opentype'), url("../../assets/fonts/montserrat-hairline-webfont.woff") format('woff'), url("../../assets/fonts/montserrat-hairline-webfont.ttf") format('truetype'), url("../../assets/fonts/montserrat-hairline-webfont.svg#Montserrat-Hairline") format('svg');
+  font-weight: 'normal';
+  font-style: normal;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  @font-face {
+    font-family: 'Montserrat-Hairline';
+    src: url("../../assets/fonts/montserrat-hairline-webfont.svg#Montserrat-Hairline") format('svg');
+  }
+}
+#barMenu {
+  height: 65px;
+  background-color: #22378a;
+  color: #fff;
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  z-index: 1000;
+}
+#barMenu .content {
+  padding-top: 26px;
+  text-align: center;
+}
+#barMenu .content .menu {
+  position: absolute;
+  left: 10px;
+  display: inline-block;
+  width: 30px;
+  height: 26.5px;
+  background-image: url("../../assets/barMenu/menu.png");
+  background-size: 100% 100%;
+}
+#barMenu .content h1 {
+  display: inline-block;
+  font-size: 18px;
+  position: relative;
+  top: 2px;
+  font-family: "Montserrat-Light";
+}
+#barMenu .content .btnAdd {
+  position: absolute;
+  right: 10px;
+  display: inline-block;
+  width: 23px;
+  height: 23px;
+  background-image: url("../../assets/barMenu/btnAdd.png");
+  background-size: 100% 100%;
+}
+.ad {
+  position: relative;
+  height: 109px;
+  background: url("../../assets/home/ad-bg.png") 100% 100%;
+}
+.ad .shadow {
+  position: relative;
+  height: 109px;
+  background-image: -webkit-linear-gradient(90deg, rgba(0,0,0,0.9), rgba(0,0,0,0));
+  background-image: -webkit-linear-gradient(left, rgba(0,0,0,0.9), rgba(0,0,0,0));
+  background-image: linear-gradient(90deg, rgba(0,0,0,0.9), rgba(0,0,0,0));
+}
+.ad .informations {
+  position: absolute;
+  left: 18px;
+  bottom: 14px;
+  color: #fff;
+  font-family: "Montserrat-Light";
+  font-size: 14px;
+}
+.ad .informations div {
+  margin-bottom: 3px;
+}
+.ad .informations .jobTitle {
+  font-family: "Montserrat-Bold";
+  text-transform: uppercase;
+}
 html,
 body {
   width: 100%;
@@ -307,4 +437,8 @@ body {
 }
 #login .btnForm input.btnValid {
   background-color: #283e95;
+}
+#home .ads {
+  z-index: 1;
+  margin-top: 65px;
 }
