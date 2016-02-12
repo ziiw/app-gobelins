@@ -4,7 +4,7 @@
 import {Utils as Utils} from "../../utils"
 import React from "react"
 import { Router, Route, browserHistory, Link } from 'react-router'
-import TweenMax from 'gsap'
+import {TweenMax, TimelineMax} from 'gsap'
 
 
 

@@ -19,6 +19,7 @@ import Layout from "./layout/layout";
 
 import Login from './views/login/login';
 import Home from './views/home/home';
+import Single from './views/single/single';
 
 
 
@@ -39,6 +40,7 @@ export default class Root extends React.Component {
         <Route path="/" component={Layout}>
           <IndexRoute component={Login} />
           <Route path="home" component={Home} onEnter={this.requireAuth}/>
+          <Route path="single" component={Single} />
         </Route>
       </Router>
     );

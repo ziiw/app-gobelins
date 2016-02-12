@@ -1,7 +1,7 @@
 // -----------------------------
 // Imports
 
-import {Utils as Utils} from "../utils";
+import {Utils as Utils} from "../../utils";
 import React from "react";
 import { Router, Route, browserHistory, Link } from 'react-router';
 

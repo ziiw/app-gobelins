@@ -208,6 +208,27 @@ select {
   background-image: url("../../assets/barMenu/btnAdd.png");
   background-size: 100% 100%;
 }
+.ad {
+  position: relative;
+  height: 109px;
+  background-color: #949dff;
+}
+.ad .shadow {
+  height: 109px;
+  background-image: -webkit-linear-gradient(90deg, rgba(0,0,0,0.75), rgba(0,0,0,0));
+  background-image: -webkit-linear-gradient(left, rgba(0,0,0,0.75), rgba(0,0,0,0));
+  background-image: linear-gradient(90deg, rgba(0,0,0,0.75), rgba(0,0,0,0));
+}
+.ad .informations {
+  position: absolute;
+  left: 15px;
+  bottom: 15px;
+  color: #fff;
+  font-family: "Montserrat-Light";
+}
+.ad .informations .jobTitle {
+  font-family: "Montserrat-Regular";
+}
 html,
 body {
   width: 100%;
