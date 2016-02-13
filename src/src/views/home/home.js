@@ -45,10 +45,6 @@ export default class Home extends React.Component {
         //this.firebaseRef.off();
     }
 
-    showSingle() {
-        this.props.history.push('/single')
-    }
-
   	render() {
         this.ads = [
             {
@@ -68,15 +64,17 @@ export default class Home extends React.Component {
             }
         ]
 
-        let handleClick = this.showSingle.bind(this)
+        // WIP: Routing to the single
+        // Probleme: je passe juste l'id, alors quon a l'annonce complete deja dispo ici
+        // Le but: passer l'objet annonce en entier a la page single.
 
     	return (
     		<div id="home">
-    			<BarMenu title="Annonces" />
+    			<BarMenu title="Annonces" menu={true}/>
 
                 <div className="ads">
                     {this.ads.map(function(ad, index) {
-                        return <Ad key={index} data={ad} onClick={handleClick} />
+                        return <Link to={`single/${index}`} key={index}><Ad data={ad} /></Link>
                     })}
                 </div>
       		</div>

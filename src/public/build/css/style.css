@@ -223,6 +223,7 @@ select {
   z-index: 1000;
 }
 #barMenu .content {
+  position: relative;
   padding-top: 26px;
   text-align: center;
 }
@@ -235,19 +236,28 @@ select {
   background-image: url("../../assets/barMenu/menu.png");
   background-size: 100% 100%;
 }
+#barMenu .content .back {
+  position: absolute;
+  left: 15px;
+  display: inline-block;
+  width: 12.6px;
+  height: 22.6px;
+  background-image: url("../../assets/barMenu/btnBack.png");
+  background-size: 100% 100%;
+}
 #barMenu .content h1 {
   display: inline-block;
   font-size: 18px;
-  position: relative;
   top: 2px;
+  position: relative;
   font-family: "Montserrat-Light";
 }
 #barMenu .content .btnAdd {
   position: absolute;
   right: 10px;
   display: inline-block;
-  width: 23px;
-  height: 23px;
+  width: 21px;
+  height: 21px;
   background-image: url("../../assets/barMenu/btnAdd.png");
   background-size: 100% 100%;
 }
@@ -439,6 +449,10 @@ body {
   background-color: #283e95;
 }
 #home .ads {
+  z-index: 1;
+  margin-top: 65px;
+}
+#single .ad {
   z-index: 1;
   margin-top: 65px;
 }

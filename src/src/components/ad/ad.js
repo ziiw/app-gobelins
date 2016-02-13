@@ -21,6 +21,7 @@ export default class Ad extends React.Component {
     }
 
     render() {
+
         return (
             <div className="ad">
                 <div className="shadow"></div>

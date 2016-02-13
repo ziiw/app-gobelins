@@ -10,7 +10,7 @@ import { Router, Route, browserHistory, Link } from 'react-router';
 // -----------------------------
 // Components
 
-
+import BarMenu from "../../components/barMenu/bar-menu.js"
 
 
 // -----------------------------
@@ -31,6 +31,7 @@ export default class Add extends React.Component {
 
         return (
             <div id="add">
+                <BarMenu title="Poster une annonce" menu={false} />
                 Add
             </div>
         );

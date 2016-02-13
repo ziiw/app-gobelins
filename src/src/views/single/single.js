@@ -10,7 +10,8 @@ import { Router, Route, browserHistory, Link } from 'react-router';
 // -----------------------------
 // Components
 
-
+import BarMenu from "../../components/barMenu/bar-menu.js"
+import Ad from "../../components/ad/ad.js"
 
 
 // -----------------------------
@@ -18,7 +19,7 @@ import { Router, Route, browserHistory, Link } from 'react-router';
 
 export default class Single extends React.Component {
 
-    constructor(props, context) {
+    constructor(props) {
         super(props)
     }
 
@@ -30,7 +31,9 @@ export default class Single extends React.Component {
     render() {
         return (
             <div id="single">
-                Single
+                <BarMenu title="Annonces" menu={false}/>
+
+                <Ad data="" />
             </div>
         );
     }

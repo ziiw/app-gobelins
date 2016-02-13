@@ -24,22 +24,21 @@ export default class BarMenu extends React.Component {
 
 	componentDidMount() {
         //  This method is called whxen an instance of this component is created.
-
+        //console.log(window.history.back())
     }
 
-	showAdd() {
-        this.props.history.push("/add")
-	}
+    goBack() {
+        window.history.back()
+    }
 
     render() {
-		let showAdd = this.showAdd.bind(this);
 
       	return (
       		<div id="barMenu">
                 <div className="content">
-                    <div className="menu"></div>
+                    {(this.props.menu) ? <div className="menu"></div> : <div className="back" onClick={this.goBack}></div>}
                     <h1>{this.props.title}</h1>
-                    <div className="btnAdd" onClick={showAdd}></div>
+                    <Link to="add"><div className="btnAdd"></div></Link>
                 </div>
         	</div>
       	);
