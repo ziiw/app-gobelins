@@ -19,7 +19,7 @@ import Layout from "./layout/layout";
 
 import Login from './views/login/login';
 import Home from './views/home/home';
-
+import Users from './views/users/users';
 
 
 // -----------------------------
@@ -29,7 +29,7 @@ export default class Root extends React.Component {
 
   requireAuth(nextState, replace) {
     if (!Utils.auth.loggedIn()) {
-      replace(nextState.location.pathname, '/'); 
+      replace(nextState.location.pathname, '/');
     }
   }
 
@@ -39,6 +39,7 @@ export default class Root extends React.Component {
         <Route path="/" component={Layout}>
           <IndexRoute component={Login} />
           <Route path="home" component={Home} onEnter={this.requireAuth}/>
+          <Route path="users" component={Users} onEnter={this.requireAuth}/>
         </Route>
       </Router>
     );
