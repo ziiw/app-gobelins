@@ -21,5 +21,5 @@ window.React = React;
 
 ReactDOM.render(
   <Root />,
-  document.body
+  document.querySelector("#app")
 );
