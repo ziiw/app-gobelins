@@ -8,8 +8,8 @@ import { Router, Route, browserHistory, Link } from 'react-router';
 // -----------------------------
 // Components
 
-//import BarMenu from "../barMenu/bar-menu.js"
-import Profil from "../profil/profil.js"
+import BarMenu from "../../components/barMenu/bar-menu.js"
+import AdProfil from "../../components/adProfil/adProfil.js"
 
 // -----------------------------
 // Core
@@ -31,12 +31,12 @@ export default class Users extends React.Component {
         description: "lorem ipsum",
         website: "www.portfolio.fr",
         contact: "john-doe@gmail.com / 0607080910",
-        profil: "photo/work.pgn",
+        picture: "../../assets/profil/default-profil-picture.png",
         works: [
-          "photo/work.pgn",
-          "photo/work.pgn",
-          "photo/work.pgn",
-          "photo/work.pgn"
+          "../../assets/profil/default-profil-picture.png",
+          "../../assets/profil/default-profil-picture.png",
+          "../../assets/profil/default-profil-picture.png",
+          "../../assets/profil/default-profil-picture.png"
         ]
       },
       {
@@ -47,12 +47,12 @@ export default class Users extends React.Component {
         description: "lorem ipsum",
         website: "www.portfolio.fr",
         contact: "john-doe@gmail.com / 0607080910",
-        profil: "photo/work.pgn",
+        picture: "../../assets/profil/default-profil-picture.png",
         works: [
-          "photo/work.pgn",
-          "photo/work.pgn",
-          "photo/work.pgn",
-          "photo/work.pgn"
+          "../../assets/profil/default-profil-picture.png",
+          "../../assets/profil/default-profil-picture.png",
+          "../../assets/profil/default-profil-picture.png",
+          "../../assets/profil/default-profil-picture.png"
         ]
       },
       {
@@ -63,12 +63,12 @@ export default class Users extends React.Component {
         description: "lorem ipsum",
         website: "www.portfolio.fr",
         contact: "john-doe@gmail.com / 0607080910",
-        profil: "photo/work.pgn",
+        picture: "../../assets/profil/default-profil-picture.png",
         works: [
-          "photo/work.pgn",
-          "photo/work.pgn",
-          "photo/work.pgn",
-          "photo/work.pgn"
+          "../../assets/profil/default-profil-picture.png",
+          "../../assets/profil/default-profil-picture.png",
+          "../../assets/profil/default-profil-picture.png",
+          "../../assets/profil/default-profil-picture.png"
         ]
       }
     ]});
@@ -77,16 +77,16 @@ export default class Users extends React.Component {
   componentWillUnmount() {}
 
   render() {
-    //<BarMenu title="Annuaire" />
     return (
       <div id="users">
-        <div className="annuaire">
+        <BarMenu title="Annuaire" />
+        <section className="ads">
          {
            this.state.users.map(function(user, index) {
-             return <Profil key={index} data={user} />
+            return <Link to={`profil/${index}`} key={index}><AdProfil data={user} /></Link>
            })
          }
-        </div>
+        </section>
       </div>
     );
   }
