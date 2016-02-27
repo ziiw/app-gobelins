@@ -9,24 +9,15 @@ import { Router, Route, browserHistory, Link } from 'react-router';
 // Components
 
 import BarMenu from "../../components/barMenu/bar-menu.js"
-import AdProfil from "../../components/adProfil/ad-profil.js"
 
 // -----------------------------
 // Core
 
-export default class Users extends React.Component {
+export default class Profil extends React.Component {
 
-  constructor(props, context) {
-    super(props)
+  constructor(state, context) {
+    super(state)
     this.state = {
-      name: "",
-      job: "",
-      promotion: "",
-      location: "",
-      description: "",
-      website: "",
-      contact: "",
-      profil: "",
       works: []
     };
   }
@@ -37,26 +28,64 @@ export default class Users extends React.Component {
       job: "Directeur Artistique Digital",
       promotion: "CRMA 2016",
       location: "Londres, Royaume-Uni",
-      description: "lorem ipsum",
+      description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt nulla quibusdam consequuntur, facilis totam velit natus earum ea atque labore fugiat nobis deserunt, quam unde nisi nemo, tenetur dolor dicta.",
       website: "www.portfolio.fr",
       contact: "john-doe@gmail.com / 0607080910",
-      profil: "photo/work.pgn",
+      profil: "../../assets/profil/default-profil-picture.png",
       works: [
         "photo/work.pgn",
         "photo/work.pgn",
         "photo/work.pgn",
         "photo/work.pgn"
+      ]
     });
   }
 
   componentWillUnmount() {}
 
   render() {
+
+    let pictureUrl = (typeof this.state.picture === 'string') ?
+     this.state.picture : "../../assets/profil/default-profil-picture.png";
+
     return (
       <div id="profil">
-        <BarMenu title={this.state.name} />
+
+        <BarMenu title='Profil' />
+
         <section className="ads">
-          <h1>{this.state.name}</h1>
+          <header className="header">
+            <img src={pictureUrl} alt={"Photo de "+this.state.name} className="photo"/>
+            <ul className="details">
+              <li><h1 className="name">{this.state.name}</h1></li>
+              <li>{this.state.job}</li>
+              <li>{this.state.location}</li>
+              <li className="line"></li>
+              <li>{this.state.promotion}</li>
+            </ul>
+          </header>
+          <section className="informations">
+            <h2>À propos</h2>
+            <p>{this.state.description}</p>
+            <div className="line"></div>
+            <h2>Site web</h2>
+            <p>{this.state.website}</p>
+            <div className="line"></div>
+            <h2>Me contacter</h2>
+            <p>{this.state.contact}</p>
+            <div className="line"></div>
+          </section>
+
+          <footer className="works">
+            <h2>Quelques créations</h2>
+            <ul className="workList">
+              {
+                this.state.works.map(function(workUrl, index) {
+                  return <li key={index} className="workImage"><img src={workUrl} alt={workUrl} /></li>
+                })
+              }
+            </ul>
+          </footer>
         </section>
       </div>
     );

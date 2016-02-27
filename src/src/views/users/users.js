@@ -47,7 +47,7 @@ export default class Users extends React.Component {
         description: "lorem ipsum",
         website: "www.portfolio.fr",
         contact: "john-doe@gmail.com / 0607080910",
-        picture: "../../assets/profil/default-profil-picture.png",
+        picture: null,
         works: [
           "../../assets/profil/default-profil-picture.png",
           "../../assets/profil/default-profil-picture.png",
