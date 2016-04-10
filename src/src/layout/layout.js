@@ -18,6 +18,12 @@ export default class Layout extends React.Component {
 
 	componentDidMount() {
         //  This method is called when an instance of this component is created.
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+
+        let app = document.querySelector("#app");
+        app.style.width = width;
+        app.style.height = height;
     }
 
 	render() {

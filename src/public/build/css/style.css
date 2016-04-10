@@ -291,16 +291,17 @@ select {
 html,
 body {
   width: 100%;
-  height: 100%;
   background-color: #fff;
+}
+#app {
+  width: 100%;
 }
 #layout {
   width: 100%;
-  height: 100%;
 }
 #login {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: #22378a;
   text-align: center;
   position: relative;
@@ -455,4 +456,43 @@ body {
 #single .ad {
   z-index: 1;
   margin-top: 65px;
+}
+#single .jobInfos {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  font-family: "Montserrat-Light";
+}
+#single .jobInfos h3 {
+  font-size: 16px;
+  font-family: "Montserrat-Bold";
+  color: #22378a;
+  margin-bottom: 20px;
+}
+#single .jobInfos .bloc {
+  position: relative;
+  height: 20px;
+  margin-bottom: 15px;
+}
+#single .jobInfos .sep {
+  width: 100%;
+  height: 2px;
+  background: #22378a;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+#single .jobInfos p {
+  display: inline-block;
+}
+#single .jobInfos p.left {
+  position: absolute;
+  left: 0px;
+}
+#single .jobInfos p.right {
+  position: absolute;
+  right: 0px;
+}
+#single .jobInfos .author p {
+  color: #22378a;
+  font-size: 14px;
 }
