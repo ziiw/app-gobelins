@@ -23,6 +23,10 @@ import Login from './views/login/login';
 import Home from './views/home/home';
 import Single from './views/single/single';
 import Add from './views/add/add';
+import Profil from './views/profil/profil';
+import Events from './views/events/events';
+import Event from './views/events/event';
+import Search from './views/search/search';
 
 
 
@@ -44,9 +48,19 @@ export default class Root extends React.Component {
             <Router history={browserHistory}>
                 <Route path="/" component={Layout}>
                     <IndexRoute component={Login}/>
+
                     <Route path="home" component={Home} onEnter={this.requireAuth}/>
+
                     <Route path="single/:ad" component={Single}/>
+
                     <Route path="add" component={Add}/>
+
+                    <Route path="profil/:id" component={Profil}/>
+
+                    <Route path="events" component={Events}/>
+                    <Route path="event/:id" component={Event}/>
+
+                    <Route path="search" component={Search}/>
                 </Route>
             </Router>
         );

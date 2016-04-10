@@ -148,6 +148,27 @@ select {
   outline: none;
   vertical-align: middle;
 }
+html,
+body {
+  font-family: "Montserrat-Light";
+  color: blackColor;
+}
+ul {
+  list-style: none;
+}
+h1,
+h2,
+h3 {
+  font-family: "Montserrat-Bold";
+}
+.ads {
+  z-index: 1;
+  margin-top: 65px;
+}
+.ads a {
+  display: block;
+  text-decoration: none;
+}
 @font-face {
   font-family: 'Montserrat-Bold';
   src: url("../../assets/fonts/montserrat-bold-webfont.eot");
@@ -285,6 +306,33 @@ select {
   margin-bottom: 3px;
 }
 .ad .informations .jobTitle {
+  font-family: "Montserrat-Bold";
+  text-transform: uppercase;
+}
+.eventComp {
+  position: relative;
+  height: 109px;
+  background: url("../../assets/home/ad-bg.png") 100% 100%;
+}
+.eventComp .shadow {
+  position: relative;
+  height: 109px;
+  background-image: -webkit-linear-gradient(90deg, rgba(0,0,0,0.9), rgba(0,0,0,0));
+  background-image: -webkit-linear-gradient(left, rgba(0,0,0,0.9), rgba(0,0,0,0));
+  background-image: linear-gradient(90deg, rgba(0,0,0,0.9), rgba(0,0,0,0));
+}
+.eventComp .informations {
+  position: absolute;
+  left: 18px;
+  bottom: 14px;
+  color: #fff;
+  font-family: "Montserrat-Light";
+  font-size: 14px;
+}
+.eventComp .informations div {
+  margin-bottom: 3px;
+}
+.eventComp .informations .jobTitle {
   font-family: "Montserrat-Bold";
   text-transform: uppercase;
 }
@@ -495,4 +543,151 @@ body {
 #single .jobInfos .author p {
   color: #22378a;
   font-size: 14px;
+}
+#profil .contentProfil {
+  margin-top: 65px;
+}
+#profil .contentProfil h2 {
+  font-size: 1.1em;
+  color: #22378a;
+  text-transform: none;
+  margin-bottom: 15px;
+}
+#profil .contentProfil .line {
+  width: 100%;
+  height: 2px;
+  background: #22378a;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+#profil .contentProfil .header {
+  height: 150px;
+  background-color: #333;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #fff;
+}
+#profil .contentProfil .header .photo {
+  height: 100%;
+  margin-right: 20px;
+}
+#profil .contentProfil .header .details li {
+  list-style: none;
+  margin: 5px 0;
+  font-size: 15px;
+}
+#profil .contentProfil .header .details li h1 {
+  text-transform: uppercase;
+  font-size: 24px;
+}
+#profil .contentProfil .header .line {
+  background-color: #808080;
+  margin: 0;
+  width: 100px;
+}
+#profil .contentProfil .informations {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+}
+#profil .contentProfil .informations li {
+  margin-top: 10px;
+}
+#profil .contentProfil .works h2 {
+  margin-left: 20px;
+}
+#profil .contentProfil .workList li {
+  width: 25%;
+  float: left;
+}
+#profil .contentProfil .workList li img {
+  width: 100%;
+}
+#events .list {
+  margin-top: 65px;
+}
+#event {
+  font-family: "Montserrat-Bold";
+  color: #22378a;
+  margin-bottom: 20px;
+  height: 2px;
+  background: #22378a;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+#event .eventComp {
+  margin-top: 65px;
+}
+#event .eventInfos {
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-left: 20px;
+  font-family: "Montserrat-Light";
+}
+#event .eventInfos div.description .title {
+  font-size: 16px;
+}
+#event .text .sep,
+#event margin-top 20px .sep,
+#event color black .sep {
+  width: 100%;
+}
+#search .filters {
+  margin-top: 65px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 100px;
+}
+#search .filters h2 {
+  position: fixed;
+  top: 65px;
+  width: 100%;
+  left: 0px;
+  height: 50px;
+  line-height: 50px;
+  text-transform: uppercase;
+  text-align: center;
+  color: #22378a;
+  border-bottom: 2px solid #ddd;
+  background: rgba(255,255,255,0.95);
+  font-family: "Montserrat-Light";
+  font-size: 13px;
+  z-index: 1000;
+}
+#search .filters ul {
+  position: absolute;
+  top: 115px;
+  width: calc(100% - 40px);
+  padding-bottom: 115px;
+  z-index: 999;
+}
+#search .filters ul.choice {
+  text-align: right;
+}
+#search .filters ul li {
+  width: 100%;
+  height: 70px;
+  line-height: 70px;
+  font-size: 15px;
+  border-bottom: 2px solid #ddd;
+  text-transform: uppercase;
+}
+#search .submit {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  height: 60px;
+  background: #22378a;
+  text-align: center;
+  line-height: 60px;
+  color: #fff;
+  text-transform: uppercase;
+  font-family: "Montserrat-Bold";
+  z-index: 1001;
 }
