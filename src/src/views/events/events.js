@@ -66,8 +66,6 @@ export default class Events extends React.Component {
 
     	return (
     		<div id="events">
-    			<BarMenu title="Évènements" menu={true}/>
-
                 <div className="list">
                     {this.events.map(function(event, index) {
                         return <Link to={`event/${index}`} key={index}><EventComp data={event} /></Link>

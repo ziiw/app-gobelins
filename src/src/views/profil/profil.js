@@ -53,9 +53,6 @@ export default class Profil extends React.Component {
 
         return (
             <div id="profil">
-
-                <BarMenu title='Profil' />
-
                 <section className="contentProfil">
                     <header className="header">
                         <img src={pictureUrl} alt={"Photo de "+this.state.name} className="photo"/>

@@ -41,7 +41,6 @@ export default class Event extends React.Component {
     render() {
         return (
             <div id="event">
-                <BarMenu title="Évènements" menu={false}/>
                 <EventComp data={this.state.event} />
                 <div className="eventInfos">
                     <div className="description">

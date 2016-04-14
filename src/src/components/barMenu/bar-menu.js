@@ -36,7 +36,7 @@ export default class BarMenu extends React.Component {
       	return (
       		<div id="barMenu">
                 <div className="content">
-                    {(this.props.menu) ? <div className="menu"></div> : <div className="back" onClick={this.goBack}></div>}
+                    {(this.props.menu) ? <div className="menu" onClick={this.props.showMenu}></div> : <div className="back" onClick={this.goBack}></div>}
                     <h1>{this.props.title}</h1>
                     <Link to="add"><div className="btnAdd"></div></Link>
                 </div>

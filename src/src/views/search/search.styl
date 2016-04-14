@@ -1,10 +1,11 @@
 #search
+	background-color #fff
 	
 	.filters
-		margin-top 65px
+		padding-top 1px
 		padding-left 20px
 		padding-right 20px
-		padding-bottom 100px
+		padding-bottom 85px
 		
 		h2
 			position fixed
@@ -20,17 +21,21 @@
 			background rgba(255,255,255,0.95)
 			font-family "Montserrat-Light"
 			font-size 13px
-			z-index 1000
+			z-index 2000
 			
 		ul
-			position absolute
-			top 115px
-			width calc(100% - 40px)
+			position relative
+			margin-top 115px
+			width 100%
 			padding-bottom 115px
-			z-index 999
+			z-index 700
 			
 			&.choice
-				text-align right
+				opacity 0
+				display none
+				left 15px
+				text-align left
+				z-index 800
 			
 			li
 				width 100%
@@ -39,6 +44,15 @@
 				font-size 15px
 				border-bottom 2px solid #ddd
 				text-transform uppercase
+				
+				p
+					width 50%
+					
+					&.left
+						float left
+					&.right
+						float right
+						text-align right
 		
 	
 	.submit

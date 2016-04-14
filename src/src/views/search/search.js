@@ -22,6 +22,15 @@ export default class Search extends React.Component {
 
 	constructor(props, context) {
 		super(props)
+
+        this.state = {
+            selected: "",
+            job: [],
+            city: [],
+            cursus: [],
+            promo: [],
+            name: []
+        }
 	}
 
 	componentDidMount() {
@@ -36,37 +45,93 @@ export default class Search extends React.Component {
         //}.bind(this))
     }
 
+    triggerCat(cat) {
+        let that = this;
+
+        this.setState({
+            selected: cat
+        });
+
+        TweenMax.to(this.refs.cat, 0.25, {
+            x: -15,
+            opacity: 0,
+            ease: Power4.easeIn,
+            onComplete: function() {
+                that.refs.cat.style.display = "none";
+            }
+        });
+
+        this.refs.choice.style.display = "block";
+        TweenMax.to(this.refs.choice, 0.25, {
+            delay: 0.25,
+            x: -15,
+            opacity: 1,
+            ease: Power4.easeOut
+        });
+    }
+
+    triggerChoice(choice){
+        let that = this;
+
+        switch(this.state.selected){
+            case "job":
+                this.setState({job: choice});
+                break;
+            case "city":
+                this.setState({city: choice});
+                break;
+            case "cursus":
+                this.setState({cursus: choice});
+                break;
+            case "promo":
+                this.setState({promo: choice});
+                break;
+        }
+
+        TweenMax.to(this.refs.choice, 0.25, {
+            x: 15,
+            opacity: 0,
+            ease: Power4.easeIn,
+            onComplete: function() {
+                that.refs.choice.style.display = "none";
+            }
+        });
+
+        this.refs.cat.style.display = "block";
+        TweenMax.to(this.refs.cat, 0.25, {
+            delay: 0.25,
+            x: 0,
+            opacity: 1,
+            ease: Power4.easeOut
+        });
+    }
+
     componentWillUnmount() {
         //this.firebaseRef.off();
     }
 
   	render() {
+        let choices = [2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016];
+        let that = this;
+
     	return (
     		<div id="search">
-    			<BarMenu title="Annuaire" menu={true}/>
-
                 <div className="filters">
-                <h2>Filtrer la recherche</h2>
-                    <ul className="categories">
-                        <li><p className="left">Métier</p><p className="right"></p></li>
-                        <li><p className="left">Ville</p><p className="right"></p></li>
-                        <li><p className="left">Formation</p><p className="right"></p></li>
-                        <li><p className="left">Promo</p><p className="right"></p></li>
-                        <li><p className="left">Nom</p><p className="right"></p></li>
+                    <h2>Filtrer la recherche</h2>
+                    <ul className="categories" ref="cat">
+                        <li onClick={this.triggerCat.bind(this, "job")}><p className="left">Métiere</p><p className="right">{this.state.job}</p></li>
+                        <li onClick={this.triggerCat.bind(this, "city")}><p className="left">Ville</p><p className="right">{this.state.city}</p></li>
+                        <li onClick={this.triggerCat.bind(this, "cursus")}><p className="left">Formation</p><p className="right">{this.state.cursus}</p></li>
+                        <li onClick={this.triggerCat.bind(this, "promo")}><p className="left">Promo</p><p className="right">{this.state.promo}</p></li>
+                        <li onClick={this.triggerCat.bind(this, "name")}><p className="left">Nom</p><p className="right">{this.state.name}</p></li>
                     </ul>
 
-                    <ul className="choice">
-                        <li><p className="right">2008</p></li>
-                        <li><p className="right">2009</p></li>
-                        <li><p className="right">2010</p></li>
-                        <li><p className="right">2011</p></li>
-                        <li><p className="right">2012</p></li>
-                        <li><p className="right">2013</p></li>
-                        <li><p className="right">2014</p></li>
-                        <li><p className="right">2015</p></li>
-                        <li><p className="right">2016</p></li>
+                    <ul className="choice" ref="choice">
+                        {choices.map(function(item, id){
+                            return <li key={id} onClick={that.triggerChoice.bind(that, item)}><p className="left">{item}</p></li>
+                        })}
                     </ul>
-
+                    <div className="clear"></div>
                 </div>
 
                 <div className="submit">Rechercher</div>

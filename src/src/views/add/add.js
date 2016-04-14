@@ -31,7 +31,6 @@ export default class Add extends React.Component {
 
         return (
             <div id="add">
-                <BarMenu title="Poster une annonce" menu={false} />
                 Add
             </div>
         );

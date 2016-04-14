@@ -156,14 +156,13 @@ body {
 ul {
   list-style: none;
 }
+.clear {
+  clear: both;
+}
 h1,
 h2,
 h3 {
   font-family: "Montserrat-Bold";
-}
-.ads {
-  z-index: 1;
-  margin-top: 65px;
 }
 .ads a {
   display: block;
@@ -235,10 +234,10 @@ h3 {
   }
 }
 #barMenu {
+  position: fixed;
   height: 65px;
   background-color: #22378a;
   color: #fff;
-  position: fixed;
   width: 100%;
   top: 0px;
   z-index: 1000;
@@ -336,6 +335,37 @@ h3 {
   font-family: "Montserrat-Bold";
   text-transform: uppercase;
 }
+#menu {
+  background-color: #22378a;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+#menu ul {
+  width: 200px;
+  position: absolute;
+  left: 0px;
+  top: 60%;
+  -webkit-transform: translate(0%, -50%);
+          transform: translate(0%, -50%);
+}
+#menu ul li {
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+#menu ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+#menu img {
+  width: 100px;
+}
 html,
 body {
   width: 100%;
@@ -346,6 +376,13 @@ body {
 }
 #layout {
   width: 100%;
+  height: 100%;
+}
+#layout .main {
+  position: relative;
+  background-color: #fff;
+  z-index: 999;
+  box-shadow: -5px 0px 20px 0px #15246d;
 }
 #login {
   width: 100%;
@@ -497,9 +534,13 @@ body {
 #login .btnForm input.btnValid {
   background-color: #283e95;
 }
+#home {
+  background-color: #fff;
+}
 #home .ads {
   z-index: 1;
-  margin-top: 65px;
+  position: relative;
+  top: 65px;
 }
 #single .ad {
   z-index: 1;
@@ -522,6 +563,17 @@ body {
   height: 20px;
   margin-bottom: 15px;
 }
+#single .jobInfos .bloc p {
+  display: inline-block;
+}
+#single .jobInfos .bloc p.left {
+  position: absolute;
+  left: 0px;
+}
+#single .jobInfos .bloc p.right {
+  position: absolute;
+  right: 0px;
+}
 #single .jobInfos .sep {
   width: 100%;
   height: 2px;
@@ -529,18 +581,7 @@ body {
   margin-bottom: 20px;
   margin-top: 20px;
 }
-#single .jobInfos p {
-  display: inline-block;
-}
-#single .jobInfos p.left {
-  position: absolute;
-  left: 0px;
-}
-#single .jobInfos p.right {
-  position: absolute;
-  right: 0px;
-}
-#single .jobInfos .author p {
+#single .jobInfos .author {
   color: #22378a;
   font-size: 14px;
 }
@@ -638,11 +679,14 @@ body {
 #event color black .sep {
   width: 100%;
 }
+#search {
+  background-color: #fff;
+}
 #search .filters {
-  margin-top: 65px;
+  padding-top: 1px;
   padding-left: 20px;
   padding-right: 20px;
-  padding-bottom: 100px;
+  padding-bottom: 85px;
 }
 #search .filters h2 {
   position: fixed;
@@ -658,17 +702,21 @@ body {
   background: rgba(255,255,255,0.95);
   font-family: "Montserrat-Light";
   font-size: 13px;
-  z-index: 1000;
+  z-index: 2000;
 }
 #search .filters ul {
-  position: absolute;
-  top: 115px;
-  width: calc(100% - 40px);
+  position: relative;
+  margin-top: 115px;
+  width: 100%;
   padding-bottom: 115px;
-  z-index: 999;
+  z-index: 700;
 }
 #search .filters ul.choice {
-  text-align: right;
+  opacity: 0;
+  display: none;
+  left: 15px;
+  text-align: left;
+  z-index: 800;
 }
 #search .filters ul li {
   width: 100%;
@@ -677,6 +725,16 @@ body {
   font-size: 15px;
   border-bottom: 2px solid #ddd;
   text-transform: uppercase;
+}
+#search .filters ul li p {
+  width: 50%;
+}
+#search .filters ul li p.left {
+  float: left;
+}
+#search .filters ul li p.right {
+  float: right;
+  text-align: right;
 }
 #search .submit {
   position: fixed;

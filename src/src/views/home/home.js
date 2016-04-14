@@ -39,6 +39,11 @@ export default class Home extends React.Component {
         //        ads: this.ads
         //    })
         //}.bind(this))
+
+        let home = document.querySelector("#home");
+        if(home.offsetHeight + 65 < window.innerHeight){
+            home.style.height = window.innerHeight + "px";
+        }
     }
 
     componentWillUnmount() {
@@ -70,8 +75,6 @@ export default class Home extends React.Component {
 
     	return (
     		<div id="home">
-    			<BarMenu title="Annonces" menu={true}/>
-
                 <div className="ads">
                     {this.ads.map(function(ad, index) {
                         return <Link to={`single/${index}`} key={index}><Ad data={ad} /></Link>

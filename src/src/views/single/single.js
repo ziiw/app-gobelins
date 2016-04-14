@@ -43,12 +43,15 @@ export default class Single extends React.Component {
     componentDidMount() {
         //  This method is called whxen an instance of this component is created.
 
+        let single = document.querySelector("#single");
+        if(single.offsetHeight + 65 < window.innerHeight){
+            single.style.height = window.innerHeight - 65 + "px";
+        }
     }
 
     render() {
         return (
             <div id="single">
-                <BarMenu title="Annonces" menu={false}/>
                 <Ad data={this.state.ad} />
                 <div className="jobInfos">
                     <h3>Type de poste</h3>
