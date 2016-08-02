@@ -10,8 +10,12 @@
 		position absolute
 		top 50%
 		left 50%
-		margin-top -89px
-		transform: translate(-50%, 0%)
+		transform translate(-50%, -50%)
+		opacity 0
+		
+		&.show
+			transition 0.5s opacity ease
+			opacity 1
 		
 	.loginMenu
 		position absolute
@@ -65,13 +69,16 @@
 	
 	.signUpInput
 		position absolute
-		top 200px
+		top 170px
 		left 50%
+		padding-bottom 60px
 		transform translate(-50%, 0%)
 		z-index 100
 		
 		input
 			width 100%
+			position relative
+			top 35px
 			text-align center
 			margin-bottom 25px
 			color white
@@ -99,14 +106,16 @@
 		height 50px
 		opacity 0
 		z-index 1001
+		display flex
 		
-		input
+		div
 			width 50%
 			height 50px
 			color white
 			border none
 			font-size 12px
-			border-radius: none
+			line-height 50px
+			border-radius none
 			
 			&.btnCancel
 				background-color #192b74

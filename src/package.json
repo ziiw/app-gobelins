@@ -27,6 +27,7 @@
   },
   "aliasify": "./src/config/aliasifyConfig.js",
   "dependencies": {
+    "canvasvideo.js": "^1.0.3",
     "firebase": "^2.4.0",
     "gsap": "^1.18.2",
     "history": "^1.17.0",

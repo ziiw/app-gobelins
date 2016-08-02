@@ -235,16 +235,20 @@ h3 {
 }
 #barMenu {
   position: fixed;
-  height: 65px;
+  height: 80px;
   background-color: #22378a;
   color: #fff;
   width: 100%;
   top: 0px;
   z-index: 1000;
+  display: block;
+}
+#barMenu.hide {
+  display: none;
 }
 #barMenu .content {
   position: relative;
-  padding-top: 26px;
+  padding-top: 30px;
   text-align: center;
 }
 #barMenu .content .menu {
@@ -396,9 +400,14 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-top: -89px;
-  -webkit-transform: translate(-50%, 0%);
-          transform: translate(-50%, 0%);
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  opacity: 0;
+}
+#login .logo.show {
+  -webkit-transition: 0.5s opacity ease;
+  transition: 0.5s opacity ease;
+  opacity: 1;
 }
 #login .loginMenu {
   position: absolute;
@@ -469,14 +478,17 @@ body {
 }
 #login .signUpInput {
   position: absolute;
-  top: 200px;
+  top: 170px;
   left: 50%;
+  padding-bottom: 60px;
   -webkit-transform: translate(-50%, 0%);
           transform: translate(-50%, 0%);
   z-index: 100;
 }
 #login .signUpInput input {
   width: 100%;
+  position: relative;
+  top: 35px;
   text-align: center;
   margin-bottom: 25px;
   color: #fff;
@@ -519,19 +531,24 @@ body {
   height: 50px;
   opacity: 0;
   z-index: 1001;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
-#login .btnForm input {
+#login .btnForm div {
   width: 50%;
   height: 50px;
   color: #fff;
   border: none;
   font-size: 12px;
+  line-height: 50px;
   border-radius: none;
 }
-#login .btnForm input.btnCancel {
+#login .btnForm div.btnCancel {
   background-color: #192b74;
 }
-#login .btnForm input.btnValid {
+#login .btnForm div.btnValid {
   background-color: #283e95;
 }
 #home {

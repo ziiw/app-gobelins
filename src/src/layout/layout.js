@@ -20,19 +20,19 @@ import Menu from "../components/menu/menu"
 // Core
 
 export default class Layout extends React.Component {
-	constructor(props) {
-		super(props);
+    constructor(props) {
+        super(props);
 
-		this.state = {
+        this.state = {
             title: "",
-            menu: false
+            menu: false,
+            showNav: false
         }
 
         this.isMenu = false;
-	}
+    }
 
-	componentDidMount() {
-        //  This method is called when an instance of this component is created.
+    componentDidMount() {
         let width = window.innerWidth;
         let height = window.innerHeight;
 
@@ -44,62 +44,63 @@ export default class Layout extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-    	this.setBarMenu(nextProps);
+        // Each change of route
+        this.setBarMenu(nextProps);
     }
 
     setBarMenu(nextProps) {
-    	let route = nextProps.routes[1].path;
+        let route = nextProps.routes[1].path;
 
-    	switch(route){
-    		case "home":
-    			this.setState({title: "Annonces", menu: true});
-    			break;
-    		case "single/:ad":
-    			this.setState({title: "Annonces", menu: false});
-    			break;
-    		case "add":
-    			this.setState({title: "Poster une annonce", menu: true});
-    			break;
-    		case "events":
-    			this.setState({title: "Évènements", menu: true});
-    			break;
-    		case "events/:id":
-    			this.setState({title: "Évènements", menu: false});
-    			break;
-    		case "search":
-    			this.setState({title: "Annuaire", menu: true});
-    			break;
-    	}
+        switch(route){
+            case "home":
+                this.setState({title: "Annonces", menu: true, showNav: true});
+                break;
+            case "single/:ad":
+                this.setState({title: "Annonces", menu: false, showNav: true});
+                break;
+            case "add":
+                this.setState({title: "Poster une annonce", menu: true, showNav: true});
+                break;
+            case "events":
+                this.setState({title: "Évènements", menu: true, showNav: true});
+                break;
+            case "events/:id":
+                this.setState({title: "Évènements", menu: false, showNav: true});
+                break;
+            case "search":
+                this.setState({title: "Annuaire", menu: true, showNav: true});
+                break;
+        }
     }
 
     showMenu() {
-    	if(!this.isMenu){
-    		this.isMenu = true;
-	    	TweenMax.to(this.refs.content, 0.5, {
-	    		x: 250,
-	    		ease: Power3.easeOut
-	    	})
-    	}else{
-    		this.isMenu = false;
-	    	TweenMax.to(this.refs.content, 0.5, {
-	    		x: 0,
-	    		ease: Power4.easeOut
-	    	})
-    	}
+        if(!this.isMenu){
+            this.isMenu = true;
+            TweenMax.to(this.refs.content, 0.5, {
+                x: 250,
+                ease: Power3.easeOut
+            })
+        }else{
+            this.isMenu = false;
+            TweenMax.to(this.refs.content, 0.5, {
+                x: 0,
+                ease: Power4.easeOut
+            })
+        }
     }
 
-	render() {
+    render() {
 
-		// {this.props.children}
-		// To render the component required by the routing
-		return (
-			<div id="layout">
-				<Menu />
-				<section className="main" ref="content">
-					<BarMenu title={this.state.title} menu={this.state.menu} showMenu={this.showMenu.bind(this)}/>
-					{this.props.children}
-				</section>
-		  	</div>
-		);
-	}
+        // {this.props.children}
+        // To render the component required by the routing
+        return (
+            <div id="layout">
+                <Menu />
+                <section className="main" ref="content">
+                    <BarMenu title={this.state.title} menu={this.state.menu} showMenu={this.showMenu.bind(this)} showNav={this.state.showNav}/>
+                    {this.props.children}
+                </section>
+            </div>
+        );
+    }
 }

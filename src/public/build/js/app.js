@@ -31180,10 +31180,7 @@ var BarMenu = (function (_React$Component) {
 
     _createClass(BarMenu, [{
         key: "componentDidMount",
-        value: function componentDidMount() {
-            //  This method is called whxen an instance of this component is created.
-            //console.log(window.history.back())
-        }
+        value: function componentDidMount() {}
     }, {
         key: "goBack",
         value: function goBack() {
@@ -31192,14 +31189,15 @@ var BarMenu = (function (_React$Component) {
     }, {
         key: "render",
         value: function render() {
+            var classNav = this.props.showNav ? "" : "hide";
 
             return _react2.default.createElement(
                 "div",
-                { id: "barMenu" },
+                { id: "barMenu", className: classNav },
                 _react2.default.createElement(
                     "div",
                     { className: "content" },
-                    this.props.menu ? _react2.default.createElement("div", { className: "menu", onClick: this.props.showMenu }) : _react2.default.createElement("div", { className: "back" }),
+                    this.props.menu ? _react2.default.createElement("div", { className: "menu", onClick: this.props.showMenu }) : _react2.default.createElement("div", { className: "back", onClick: this.goBack }),
                     _react2.default.createElement(
                         "h1",
                         null,
@@ -31353,7 +31351,64 @@ var Menu = (function (_React$Component) {
       return _react2.default.createElement(
         "div",
         { id: "menu" },
-        _react2.default.createElement("img", { src: "assets/login/logo.png", alt: "" })
+        _react2.default.createElement(
+          "ul",
+          null,
+          _react2.default.createElement(
+            "li",
+            null,
+            _react2.default.createElement(
+              _reactRouter.Link,
+              { to: '/home' },
+              "Annonces"
+            )
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            _react2.default.createElement(
+              _reactRouter.Link,
+              { to: '/search' },
+              "Annuaire"
+            )
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            _react2.default.createElement(
+              _reactRouter.Link,
+              { to: '/home' },
+              "Map monde"
+            )
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            _react2.default.createElement(
+              _reactRouter.Link,
+              { to: '/home' },
+              "Profil"
+            )
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            _react2.default.createElement(
+              _reactRouter.Link,
+              { to: '/events' },
+              "évènements"
+            )
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            _react2.default.createElement(
+              _reactRouter.Link,
+              { to: '/home' },
+              "Paramètres"
+            )
+          )
+        )
       );
     }
   }]);
@@ -31369,7 +31424,7 @@ exports.default = Menu;
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _utils = require("../utils");
@@ -31404,93 +31459,105 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // Core
 
 var Layout = (function (_React$Component) {
-  _inherits(Layout, _React$Component);
+    _inherits(Layout, _React$Component);
 
-  function Layout(props) {
-    _classCallCheck(this, Layout);
+    function Layout(props) {
+        _classCallCheck(this, Layout);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Layout).call(this, props));
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Layout).call(this, props));
 
-    _this.state = {
-      title: "",
-      menu: false
-    };
+        _this.state = {
+            title: "",
+            menu: false,
+            showNav: false
+        };
 
-    _this.titleMenu = "";
-    _this.menuBtn = false;
-    return _this;
-  }
-
-  _createClass(Layout, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      //  This method is called when an instance of this component is created.
-      var width = window.innerWidth;
-      var height = window.innerHeight;
-
-      var app = document.querySelector("#app");
-      app.style.width = width;
-      app.style.height = height;
-
-      this.setBarMenu(this.props);
+        _this.isMenu = false;
+        return _this;
     }
-  }, {
-    key: "componentWillReceiveProps",
-    value: function componentWillReceiveProps(nextProps) {
-      this.setBarMenu(nextProps);
-    }
-  }, {
-    key: "setBarMenu",
-    value: function setBarMenu(nextProps) {
-      var route = nextProps.routes[1].path;
 
-      switch (route) {
-        case "home":
-          this.setState({ title: "Annonces", menu: true });
-          break;
-        case "single/:ad":
-          this.setState({ title: "Annonces", menu: false });
-          break;
-        case "add":
-          this.setState({ title: "Poster une annonce", menu: true });
-          break;
-        case "events":
-          this.setState({ title: "Évènements", menu: true });
-          break;
-        case "events/:id":
-          this.setState({ title: "Évènements", menu: false });
-          break;
-        case "search":
-          this.setState({ title: "Annuaire", menu: true });
-          break;
-      }
-    }
-  }, {
-    key: "showMenu",
-    value: function showMenu() {
-      console.log("Show menu");
-    }
-  }, {
-    key: "render",
-    value: function render() {
+    _createClass(Layout, [{
+        key: "componentDidMount",
+        value: function componentDidMount() {
+            var width = window.innerWidth;
+            var height = window.innerHeight;
 
-      // {this.props.children}
-      // To render the component required by the routing
-      return _react2.default.createElement(
-        "div",
-        { id: "layout" },
-        _react2.default.createElement(_barMenu2.default, { title: this.state.title, menu: this.state.menu, showMenu: this.showMenu.bind(this) }),
-        _react2.default.createElement(_menu2.default, null),
-        _react2.default.createElement(
-          "section",
-          { ref: "content" },
-          this.props.children
-        )
-      );
-    }
-  }]);
+            var app = document.querySelector("#app");
+            app.style.width = width;
+            app.style.height = height;
 
-  return Layout;
+            this.setBarMenu(this.props);
+        }
+    }, {
+        key: "componentWillReceiveProps",
+        value: function componentWillReceiveProps(nextProps) {
+            // Each change of route
+            this.setBarMenu(nextProps);
+        }
+    }, {
+        key: "setBarMenu",
+        value: function setBarMenu(nextProps) {
+            var route = nextProps.routes[1].path;
+
+            switch (route) {
+                case "home":
+                    this.setState({ title: "Annonces", menu: true, showNav: true });
+                    break;
+                case "single/:ad":
+                    this.setState({ title: "Annonces", menu: false, showNav: true });
+                    break;
+                case "add":
+                    this.setState({ title: "Poster une annonce", menu: true, showNav: true });
+                    break;
+                case "events":
+                    this.setState({ title: "Évènements", menu: true, showNav: true });
+                    break;
+                case "events/:id":
+                    this.setState({ title: "Évènements", menu: false, showNav: true });
+                    break;
+                case "search":
+                    this.setState({ title: "Annuaire", menu: true, showNav: true });
+                    break;
+            }
+        }
+    }, {
+        key: "showMenu",
+        value: function showMenu() {
+            if (!this.isMenu) {
+                this.isMenu = true;
+                TweenMax.to(this.refs.content, 0.5, {
+                    x: 250,
+                    ease: Power3.easeOut
+                });
+            } else {
+                this.isMenu = false;
+                TweenMax.to(this.refs.content, 0.5, {
+                    x: 0,
+                    ease: Power4.easeOut
+                });
+            }
+        }
+    }, {
+        key: "render",
+        value: function render() {
+
+            // {this.props.children}
+            // To render the component required by the routing
+            return _react2.default.createElement(
+                "div",
+                { id: "layout" },
+                _react2.default.createElement(_menu2.default, null),
+                _react2.default.createElement(
+                    "section",
+                    { className: "main", ref: "content" },
+                    _react2.default.createElement(_barMenu2.default, { title: this.state.title, menu: this.state.menu, showMenu: this.showMenu.bind(this), showNav: this.state.showNav }),
+                    this.props.children
+                )
+            );
+        }
+    }]);
+
+    return Layout;
 })(_react2.default.Component);
 
 exports.default = Layout;
@@ -31646,84 +31713,90 @@ exports.default = Root;
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+    value: true
 });
 var Utils = exports.Utils = {
 
-	auth: {
-		login: function login(email, pass, cb) {
+    auth: {
+        login: function login(email, pass, cb) {
 
-			if (localStorage.token) {
-				if (cb) {
-					cb(true);
-				}
+            // if(localStorage.token) {
+            //     if (cb) {
+            //         cb(true);
+            //     }
 
-				Utils.auth.returnLog(true);
-				return;
-			}
+            //     // Utils.auth.returnLog(true);
+            //     return;
+            // }
 
-			Utils.auth.callDB(email, pass, function (res) {
-				if (res.authenticated) {
-					localStorage.token = res.token;
+            var authLogin = new Promise(function (resolve, reject) {
+                Utils.auth.callDB(email, pass, function (res) {
+                    resolve(res);
+                });
+            });
 
-					if (cb) {
-						cb(true);
-					}
+            authLogin.then(function (res) {
+                if (res.authenticated) {
+                    localStorage.token = res.token;
 
-					Utils.auth.returnLog(true);
-				} else {
+                    if (cb) {
+                        cb(true);
+                    }
 
-					if (cb) {
-						cb(false);
-					}
+                    // Utils.auth.returnLog(true);
+                } else {
 
-					Utils.auth.returnLog(false);
-				}
-			});
-		},
+                        if (cb) {
+                            cb(false);
+                        }
 
-		getToken: function getToken() {
-			return localStorage.token;
-		},
+                        // Utils.auth.returnLog(false);
+                    }
+            });
+        },
 
-		logout: function logout(cb) {
-			delete localStorage.token;
-			if (cb) cb();
-			Utils.auth.returnLog(false);
-		},
+        getToken: function getToken() {
+            return localStorage.token;
+        },
 
-		loggedIn: function loggedIn() {
-			return !!localStorage.token;
-		},
+        logout: function logout(cb) {
+            delete localStorage.token;
+            if (cb) cb();
+            Utils.auth.returnLog(false);
+        },
 
-		returnLog: function returnLog() {},
+        loggedIn: function loggedIn() {
+            return !!localStorage.token;
+        },
 
-		callDB: function callDB(email, pass, cb) {
+        // returnLog: () => {},
 
-			// Call DB to check login
+        callDB: function callDB(email, pass, cb) {
 
-			setTimeout(function () {
-				if (email === 'ok' && pass === 'ok') {
-					var data = {
-						authenticated: true,
-						token: Math.random().toString(36).substring(7)
-					};
+            // Call DB to check login
 
-					cb(data);
-				} else {
-					cb({ authenticated: false });
-				}
-			}, 0);
-		}
-	},
+            setTimeout(function () {
+                if (email === 'ok' && pass === 'ok') {
+                    var data = {
+                        authenticated: true,
+                        token: Math.random().toString(36).substring(7)
+                    };
 
-	hello: function hello() {
-		console.log("hello");
-	},
+                    cb(data);
+                } else {
+                    cb({ authenticated: false });
+                }
+            }, 0);
+        }
+    },
 
-	ya: function ya() {
-		console.log("yaaa");
-	}
+    hello: function hello() {
+        console.log("hello");
+    },
+
+    ya: function ya() {
+        console.log("yaaa");
+    }
 };
 
 },{}],218:[function(require,module,exports){
@@ -32097,6 +32170,11 @@ var Home = (function (_React$Component) {
             //        ads: this.ads
             //    })
             //}.bind(this))
+
+            var home = document.querySelector("#home");
+            if (home.offsetHeight + 65 < window.innerHeight) {
+                home.style.height = window.innerHeight + "px";
+            }
         }
     }, {
         key: "componentWillUnmount",
@@ -32153,7 +32231,7 @@ exports.default = Home;
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+    value: true
 });
 
 var _utils = require("../../utils");
@@ -32181,190 +32259,197 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // Core
 
 var Login = (function (_React$Component) {
-	_inherits(Login, _React$Component);
+    _inherits(Login, _React$Component);
 
-	function Login(props, context) {
-		_classCallCheck(this, Login);
+    function Login(props, context) {
+        _classCallCheck(this, Login);
 
-		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Login).call(this, props));
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Login).call(this, props));
 
-		_this.state = { connected: _utils.Utils.auth.loggedIn(), signIn: false, signUp: false, form: false };
+        _this.state = {
+            signIn: false,
+            signUp: false,
+            form: false
+        };
+        return _this;
+    }
 
-		_this.updateAuth = _this.updateAuth.bind(_this);
-		return _this;
-	}
+    _createClass(Login, [{
+        key: "componentDidMount",
+        value: function componentDidMount() {
+            var _this2 = this;
 
-	_createClass(Login, [{
-		key: "componentDidMount",
-		value: function componentDidMount() {
-			//  This method is called whxen an instance of this component is created.
-			_utils.Utils.auth.change = this.updateAuth();
-			_utils.Utils.auth.login();
+            _utils.Utils.auth.login(null, null, function (loggedIn) {
+                if (loggedIn) {
+                    _this2.props.history.push("/home");
+                } else {
+                    _this2.setAnims();
+                    _this2.animEntry();
+                }
+            });
+        }
+    }, {
+        key: "setAnims",
+        value: function setAnims() {
+            // Set signIn animation
+            this.tlSignIn = new TimelineMax({ paused: true });
+            this.tlSignIn.addLabel("btnSignIn").addLabel("btnSignUp", "+0.25").addLabel("inputEmail", "+0.25").addLabel("inputPass", "+0.5").addLabel("btnForm").to(this.refs.loginMenu, 0.1, { css: { "z-index": 100 } }).to(this.refs.signInInput, 0.1, { css: { "z-index": 1000 } }).to(this.refs.btnSignIn, 0.75, { y: -35, opacity: 0, ease: Power4.easeInOut }, "btnSignIn").to(this.refs.btnSignUp, 0.5, { y: -35, opacity: 0, ease: Power4.easeInOut }, "btnSignUp").to(this.refs.btnForm, 1, { opacity: 1, ease: Power4.easeInOut }, "btnForm").to(this.refs.inputEmail, 0.75, { y: -30, opacity: 1, ease: Power4.easeOut }, "inputEmail").to(this.refs.inputPass, 0.5, { y: -30, opacity: 1, ease: Power4.easeOut }, "inputPass");
 
-			if (this.state.connected) {
-				this.props.history.push("/home");
-			} else {
-				this.setAnims();
-				this.animEntry();
-			}
-		}
-	}, {
-		key: "updateAuth",
-		value: function updateAuth(loggedIn) {
-			this.setState({ connected: loggedIn });
-		}
-	}, {
-		key: "setAnims",
-		value: function setAnims() {
-			// Set signIn animation
-			this.tlSignIn = new TimelineMax({ paused: true });
-			this.tlSignIn.addLabel("btnSignIn").addLabel("btnSignUp", "+0.25").addLabel("inputEmail", "+0.25").addLabel("inputPass", "+0.5").addLabel("btnForm").to(this.refs.loginMenu, 0.1, { css: { "z-index": 100 } }).to(this.refs.signInInput, 0.1, { css: { "z-index": 1000 } }).to(this.refs.btnSignIn, 0.75, { y: -35, opacity: 0, ease: Power4.easeInOut }, "btnSignIn").to(this.refs.btnSignUp, 0.5, { y: -35, opacity: 0, ease: Power4.easeInOut }, "btnSignUp").to(this.refs.btnForm, 1, { opacity: 1, ease: Power4.easeInOut }, "btnForm").to(this.refs.inputEmail, 0.75, { y: -30, opacity: 1, ease: Power4.easeOut }, "inputEmail").to(this.refs.inputPass, 0.5, { y: -30, opacity: 1, ease: Power4.easeOut }, "inputPass");
+            var top = this.refs.logo.offsetTop;
+            var listInputs = document.querySelectorAll(".signUpInput input");
 
-			var top = this.refs.logo.offsetTop;
-			var listInputs = document.querySelectorAll(".signUpInput input");
+            // Set signUp animation
+            this.tlSignUp = new TimelineMax({ paused: true });
+            this.tlSignUp.addLabel("logo").addLabel("btnSignIn").addLabel("btnSignUp", "+0.25").addLabel("btnForm", "+0.25").addLabel("inputs", "+0.5").to(this.refs.logo, 0.75, { y: -top, scaleX: 0.6, scaleY: 0.6, ease: Power4.easeInOut }, "logo") // css:{top: "120px", width: "100px"}
+            .to(this.refs.btnSignIn, 0.75, { y: -35, opacity: 0, ease: Power4.easeInOut }, "btnSignIn").to(this.refs.btnSignUp, 0.5, { y: -35, opacity: 0, ease: Power4.easeInOut }, "btnSignUp").to(this.refs.btnForm, 1, { opacity: 1, ease: Power4.easeInOut }, "btnForm").staggerTo(listInputs, 0.25, { y: -35, opacity: 1, ease: Power4.easeOut }, 0.07, "inputs");
+        }
+    }, {
+        key: "animEntry",
+        value: function animEntry() {
+            _gsap2.default.to(this.refs.logo, 1.5, {
+                y: "-=30px",
+                ease: Power4.easeInOut
+            });
 
-			// Set signUp animation
-			this.tlSignUp = new TimelineMax({ paused: true });
-			this.tlSignUp.addLabel("logo").addLabel("btnSignIn").addLabel("btnSignUp", "+0.25").addLabel("btnForm", "+0.25").addLabel("inputs", "+0.5").to(this.refs.logo, 0.75, { y: -top, scaleX: 0.6, scaleY: 0.6, ease: Power4.easeInOut }, "logo") // css:{top: "120px", width: "100px"}
-			.to(this.refs.btnSignIn, 0.75, { y: -35, opacity: 0, ease: Power4.easeInOut }, "btnSignIn").to(this.refs.btnSignUp, 0.5, { y: -35, opacity: 0, ease: Power4.easeInOut }, "btnSignUp").to(this.refs.btnForm, 1, { opacity: 1, ease: Power4.easeInOut }, "btnForm").staggerTo(listInputs, 0.25, { y: -35, opacity: 1, ease: Power4.easeOut }, 0.07, "inputs");
-		}
-	}, {
-		key: "animEntry",
-		value: function animEntry() {
-			_gsap2.default.to(this.refs.logo, 1.5, {
-				y: -30,
-				ease: Power4.easeInOut
-			});
+            _gsap2.default.to(this.refs.btnSignIn, 1, {
+                delay: 0.75,
+                y: -25,
+                opacity: 1,
+                ease: Power4.easeOut
+            });
 
-			_gsap2.default.to(this.refs.btnSignIn, 1, {
-				delay: 0.75,
-				y: -25,
-				opacity: 1,
-				ease: Power4.easeOut
-			});
+            _gsap2.default.to(this.refs.btnSignUp, 0.75, {
+                delay: 1,
+                y: -25,
+                opacity: 1,
+                ease: Power4.easeOut
+            });
+        }
+    }, {
+        key: "showSignIn",
+        value: function showSignIn() {
+            this.setState({ signIn: true, form: true });
+            this.tlSignIn.play();
+        }
+    }, {
+        key: "showSignUp",
+        value: function showSignUp() {
+            this.setState({ signUp: true, form: true });
+            this.tlSignUp.play();
+        }
+    }, {
+        key: "backMenu",
+        value: function backMenu() {
 
-			_gsap2.default.to(this.refs.btnSignUp, 0.75, {
-				delay: 1,
-				y: -25,
-				opacity: 1,
-				ease: Power4.easeOut
-			});
-		}
-	}, {
-		key: "showSignIn",
-		value: function showSignIn() {
-			this.setState({ signIn: true, form: true });
-			this.tlSignIn.play();
-		}
-	}, {
-		key: "showSignUp",
-		value: function showSignUp() {
-			this.setState({ signUp: true, form: true });
-			this.tlSignUp.play();
-		}
-	}, {
-		key: "backMenu",
-		value: function backMenu() {
+            if (this.state.signIn) {
+                // If come back from signIn
+                this.tlSignIn.reverse();
+            } else {
+                // If come back from signUp
+                this.tlSignUp.reverse();
+            }
 
-			if (this.state.signIn) {
-				// If come back from signIn
-				this.tlSignIn.reverse();
-			} else {
-				// If come back from signUp
-				this.tlSignUp.reverse();
-			}
+            this.state = { signIn: false, signUp: false, form: false };
+        }
+    }, {
+        key: "handleSubmit",
+        value: function handleSubmit(event) {
+            var _this3 = this;
 
-			this.state = { signIn: false, signUp: false, form: false };
-		}
-	}, {
-		key: "handleSubmit",
-		value: function handleSubmit(event) {
-			var _this2 = this;
+            event.preventDefault();
 
-			event.preventDefault();
+            if (this.state.signIn) {
+                var email = this.refs.inputEmail.value;
+                var pass = this.refs.inputPass.value;
 
-			if (this.state.signIn) {
-				var email = this.refs.inputEmail.value;
-				var pass = this.refs.inputPass.value;
+                _utils.Utils.auth.login(email, pass, function (loggedIn) {
+                    if (!loggedIn) {
+                        return _this3.setState({ error: true });
+                    }
 
-				_utils.Utils.auth.login(email, pass, function (loggedIn) {
-					if (!loggedIn) return _this2.setState({ error: true });
+                    _this3.props.history.push('/home');
+                });
+            } else {
+                // let email = this.refs.inputEmail.value
+                // let pass = this.refs.inputPass.value
+            }
+        }
+    }, {
+        key: "render",
+        value: function render() {
+            var handleSignIn = this.showSignIn.bind(this);
+            var handleSignUp = this.showSignUp.bind(this);
+            var handleBack = this.backMenu.bind(this);
+            var handleSubmit = this.handleSubmit.bind(this);
 
-					_this2.props.history.push('/home');
-				});
-			} else {
-				// let email = this.refs.inputEmail.value
-				// let pass = this.refs.inputPass.value
-			}
-		}
-	}, {
-		key: "render",
-		value: function render() {
-			var handleSignIn = this.showSignIn.bind(this);
-			var handleSignUp = this.showSignUp.bind(this);
-			var handleBack = this.backMenu.bind(this);
-			var handleSubmit = this.handleSubmit.bind(this);
+            return _react2.default.createElement(
+                "div",
+                { id: "login" },
+                _react2.default.createElement("img", { src: "assets/login/logo.png", className: "logo", ref: "logo" }),
+                _react2.default.createElement(
+                    "div",
+                    { ref: "loginMenu", className: "loginMenu" },
+                    _react2.default.createElement(
+                        "button",
+                        { ref: "btnSignIn", onClick: handleSignIn },
+                        "SE CONNECTER"
+                    ),
+                    _react2.default.createElement("br", null),
+                    _react2.default.createElement(
+                        "button",
+                        { ref: "btnSignUp", onClick: handleSignUp },
+                        "CRÉER UN COMPTE"
+                    )
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { ref: "signInInput", className: "signInInput" },
+                    _react2.default.createElement("input", { ref: "inputEmail", type: "text", disabled: !this.state.signIn, placeholder: "ADRESSE EMAIL" }),
+                    _react2.default.createElement("br", null),
+                    _react2.default.createElement("input", { ref: "inputPass", type: "password", disabled: !this.state.signIn, placeholder: "MOT DE PASSE" })
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { ref: "signUpInput", className: "signUpInput" },
+                    _react2.default.createElement("input", { ref: "inputLastname", type: "text", disabled: !this.state.signUp, placeholder: "NOM" }),
+                    _react2.default.createElement("br", null),
+                    _react2.default.createElement("input", { ref: "inputFirstname", type: "text", disabled: !this.state.signUp, placeholder: "PRÉNOM" }),
+                    _react2.default.createElement("br", null),
+                    _react2.default.createElement("input", { ref: "inputPhoto", type: "text", disabled: !this.state.signUp, placeholder: "PHOTO" }),
+                    _react2.default.createElement("br", null),
+                    _react2.default.createElement("input", { ref: "inputEmailSignUp", type: "text", disabled: !this.state.signUp, placeholder: "ADRESSE EMAIL" }),
+                    _react2.default.createElement("br", null),
+                    _react2.default.createElement("input", { ref: "inputPassSignUp", type: "password", disabled: !this.state.signUp, placeholder: "MOT DE PASSE" }),
+                    _react2.default.createElement("input", { ref: "inputPhone", type: "text", disabled: !this.state.signUp, placeholder: "TÉLÉPHONE" }),
+                    _react2.default.createElement("br", null),
+                    _react2.default.createElement("input", { ref: "inputPromo", type: "text", disabled: !this.state.signUp, placeholder: "FORMATION / PROMO" }),
+                    _react2.default.createElement("br", null),
+                    _react2.default.createElement("input", { ref: "inputCity", type: "text", disabled: !this.state.signUp, placeholder: "VILLE" }),
+                    _react2.default.createElement("br", null),
+                    _react2.default.createElement("input", { ref: "inputJob", type: "text", disabled: !this.state.signUp, placeholder: "MÉTIER" }),
+                    _react2.default.createElement("br", null),
+                    _react2.default.createElement("input", { ref: "inputWeb", type: "text", disabled: !this.state.signUp, placeholder: "SITE WEB / BLOG" }),
+                    _react2.default.createElement("br", null)
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { ref: "btnForm", className: "btnForm" },
+                    _react2.default.createElement(
+                        "div",
+                        { ref: "btnCancel", className: "btnCancel", onClick: handleBack },
+                        "RETOUR"
+                    ),
+                    _react2.default.createElement(
+                        "div",
+                        { ref: "btnValid", className: "btnValid", onClick: handleSubmit },
+                        "VALIDER"
+                    )
+                )
+            );
+        }
+    }]);
 
-			return _react2.default.createElement(
-				"div",
-				{ id: "login" },
-				_react2.default.createElement("img", { src: "assets/login/logo.png", className: "logo", ref: "logo" }),
-				_react2.default.createElement(
-					"div",
-					{ ref: "loginMenu", className: "loginMenu" },
-					_react2.default.createElement(
-						"button",
-						{ ref: "btnSignIn", onClick: handleSignIn },
-						"SE CONNECTER"
-					),
-					_react2.default.createElement("br", null),
-					_react2.default.createElement(
-						"button",
-						{ ref: "btnSignUp", onClick: handleSignUp },
-						"CRÉER UN COMPTE"
-					)
-				),
-				_react2.default.createElement(
-					"div",
-					{ ref: "signInInput", className: "signInInput" },
-					_react2.default.createElement("input", { ref: "inputEmail", type: "text", disabled: !this.state.signIn, placeholder: "ADRESSE EMAIL" }),
-					_react2.default.createElement("br", null),
-					_react2.default.createElement("input", { ref: "inputPass", type: "password", disabled: !this.state.signIn, placeholder: "MOT DE PASSE" })
-				),
-				_react2.default.createElement(
-					"div",
-					{ ref: "signUpInput", className: "signUpInput" },
-					_react2.default.createElement("input", { ref: "inputLastname", type: "text", disabled: !this.state.signUp, placeholder: "NOM" }),
-					_react2.default.createElement("br", null),
-					_react2.default.createElement("input", { ref: "inputFirstname", type: "text", disabled: !this.state.signUp, placeholder: "PRÉNOM" }),
-					_react2.default.createElement("br", null),
-					_react2.default.createElement("input", { ref: "inputPhoto", type: "text", disabled: !this.state.signUp, placeholder: "PHOTO" }),
-					_react2.default.createElement("br", null),
-					_react2.default.createElement("input", { ref: "inputEmailSignUp", type: "text", disabled: !this.state.signUp, placeholder: "ADRESSE EMAIL" }),
-					_react2.default.createElement("br", null),
-					_react2.default.createElement("input", { ref: "inputPassSignUp", type: "password", disabled: !this.state.signUp, placeholder: "MOT DE PASSE" }),
-					_react2.default.createElement("input", { ref: "inputPhone", type: "text", disabled: !this.state.signUp, placeholder: "TÉLÉPHONE" }),
-					_react2.default.createElement("br", null),
-					_react2.default.createElement("input", { ref: "inputPromo", type: "text", disabled: !this.state.signUp, placeholder: "FORMATION / PROMO" }),
-					_react2.default.createElement("br", null),
-					_react2.default.createElement("input", { ref: "inputCity", type: "text", disabled: !this.state.signUp, placeholder: "VILLE" }),
-					_react2.default.createElement("br", null),
-					_react2.default.createElement("input", { ref: "inputJob", type: "text", disabled: !this.state.signUp, placeholder: "MÉTIER" }),
-					_react2.default.createElement("br", null),
-					_react2.default.createElement("input", { ref: "inputWeb", type: "text", disabled: !this.state.signUp, placeholder: "SITE WEB / BLOG" }),
-					_react2.default.createElement("br", null)
-				),
-				_react2.default.createElement(
-					"div",
-					{ ref: "btnForm", className: "btnForm" },
-					_react2.default.createElement("input", { ref: "btnCancel", className: "btnCancel", onClick: handleBack, type: "button", disabled: !this.state.form, value: "RETOUR" }),
-					_react2.default.createElement("input", { ref: "btnValid", className: "btnValid", onClick: handleSubmit, type: "button", disabled: !this.state.form, value: "VALIDER" })
-				)
-			);
-		}
-	}]);
-
-	return Login;
+    return Login;
 })(_react2.default.Component);
 
 exports.default = Login;
@@ -32716,7 +32801,7 @@ var Search = (function (_React$Component) {
                             _react2.default.createElement(
                                 "p",
                                 { className: "left" },
-                                "Métiere"
+                                "Métier"
                             ),
                             _react2.default.createElement(
                                 "p",
@@ -32884,6 +32969,10 @@ var Single = (function (_React$Component) {
         value: function componentDidMount() {
             //  This method is called whxen an instance of this component is created.
 
+            var single = document.querySelector("#single");
+            if (single.offsetHeight + 65 < window.innerHeight) {
+                single.style.height = window.innerHeight - 65 + "px";
+            }
         }
     }, {
         key: "render",

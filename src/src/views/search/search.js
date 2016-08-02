@@ -119,7 +119,7 @@ export default class Search extends React.Component {
                 <div className="filters">
                     <h2>Filtrer la recherche</h2>
                     <ul className="categories" ref="cat">
-                        <li onClick={this.triggerCat.bind(this, "job")}><p className="left">Métiere</p><p className="right">{this.state.job}</p></li>
+                        <li onClick={this.triggerCat.bind(this, "job")}><p className="left">Métier</p><p className="right">{this.state.job}</p></li>
                         <li onClick={this.triggerCat.bind(this, "city")}><p className="left">Ville</p><p className="right">{this.state.city}</p></li>
                         <li onClick={this.triggerCat.bind(this, "cursus")}><p className="left">Formation</p><p className="right">{this.state.cursus}</p></li>
                         <li onClick={this.triggerCat.bind(this, "promo")}><p className="left">Promo</p><p className="right">{this.state.promo}</p></li>
