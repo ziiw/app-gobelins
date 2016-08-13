@@ -94,10 +94,10 @@ export default class Search extends React.Component {
             ease: Power4.easeIn,
             onComplete: function() {
                 that.refs.choice.style.display = "none";
+                that.refs.cat.style.display = "block";
             }
         });
 
-        this.refs.cat.style.display = "block";
         TweenMax.to(this.refs.cat, 0.25, {
             delay: 0.25,
             x: 0,

@@ -5,10 +5,14 @@ import {Utils as Utils} from "../../utils";
 import React from "react";
 import { Router, Route, browserHistory, Link } from 'react-router';
 
+
+
 // -----------------------------
 // Components
 
 import BarMenu from "../../components/barMenu/bar-menu.js"
+
+
 
 // -----------------------------
 // Core
@@ -83,6 +87,7 @@ export default class Profil extends React.Component {
                             {this.state.works.map(function(workUrl, index) {
                                 return <li key={index} className="workImage"><img src={workUrl} alt={workUrl} /></li>
                             })}
+                            <div style={{clear: "both"}}></div> 
                         </ul>
                     </footer>
                 </section>

@@ -38,7 +38,7 @@ export default class Menu extends React.Component {
                     <li><Link to={'/home'}>Annonces</Link></li>
                     <li><Link to={'/search'}>Annuaire</Link></li>
                     <li><Link to={'/home'}>Map monde</Link></li>
-                    <li><Link to={'/home'}>Profil</Link></li>
+                    <li><Link to={'/profil/1'}>Profil</Link></li>
                     <li><Link to={'/events'}>évènements</Link></li>
                     <li><Link to={'/home'}>Paramètres</Link></li>
                 </ul>

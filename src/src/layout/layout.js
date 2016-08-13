@@ -15,6 +15,13 @@ import Menu from "../components/menu/menu"
 
 
 
+// -----------------------------
+// Models
+
+import JobMod from "../data/jobMod";
+
+
+
 
 // -----------------------------
 // Core
@@ -48,6 +55,15 @@ export default class Layout extends React.Component {
         this.setBarMenu(nextProps);
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        let currentPath = this.props.location.pathname;
+        let prevPath = prevProps.location.pathname;
+
+        if(currentPath != prevPath && this.isMenu){
+            this.showMenu();
+        }
+    }
+
     setBarMenu(nextProps) {
         let route = nextProps.routes[1].path;
 
@@ -70,10 +86,14 @@ export default class Layout extends React.Component {
             case "search":
                 this.setState({title: "Annuaire", menu: true, showNav: true});
                 break;
+            case "profil/:id":
+                this.setState({title: "Profil", menu: true, showNav: true});
+                break;
         }
     }
 
     showMenu() {
+        let content = this.refs.content;
         if(!this.isMenu){
             this.isMenu = true;
             TweenMax.to(this.refs.content, 0.5, {
@@ -84,7 +104,10 @@ export default class Layout extends React.Component {
             this.isMenu = false;
             TweenMax.to(this.refs.content, 0.5, {
                 x: 0,
-                ease: Power4.easeOut
+                ease: Power4.easeOut,
+                onComplete: () => {
+                    content.style = "";
+                }
             })
         }
     }
