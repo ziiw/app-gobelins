@@ -1,7 +1,71 @@
+// -----------------------------
+// Imports
+
+import PouchDB from "pouchdb";
+PouchDB.plugin(require('pouchdb-authentication'));
+
+
+
+
 export let Utils = {
+    
+    init: () => {
+        Utils.db = new PouchDB('http://127.0.0.1:5984/gobelins-app', {skipSetup: true});
+    },
 
     auth: {
-        login: (email, pass, cb) => {
+        login: (email, pass) => {
+            let db = new PouchDB('http://127.0.0.1:5984/gobelins-app', {skipSetup: true});
+
+            // db.login(email, pass, function (err, response) {
+            //     if (err) {
+            //         if (err.name === 'unauthorized') {
+            //             // name or password incorrect
+            //             console.warn("Credentials incorrect");
+            //         } else {
+            //             // cosmic rays, a meteor, etc.
+            //             console.warn("Connexion error");
+            //         }
+            //     }
+            //     console.log(response);
+            // });
+
+            return false;
+        },
+
+        signup: (email, pass, data) => {
+            let metadata = {
+                metadata: {
+                    lastname: data.lastname,
+                    firstname: data.firstname,
+                    email: email,
+                    roles: "gobelins-app"
+                }
+            }
+
+            console.log(metadata)
+
+            let db = new PouchDB('http://127.0.0.1:5984/gobelins-app', {skipSetup: true});
+
+            db.signup(email, pass, metadata, function (err, response) {
+                if (err) {
+                    if (err.name === 'conflict') {
+                        // "batman" already exists, choose another username
+                        console.warn("Already exists");
+                    } else if (err.name === 'forbidden') {
+                        // invalid username
+                        console.warn("Invalid username");
+                    } else {
+                        // HTTP error, cosmic rays, etc.
+                        console.warn("Http error");
+                    }
+                }
+
+                console.log(response)
+            });
+        },
+
+        loginOld: (email, pass, cb) => {
             
             if(localStorage.token) {
                 if (cb) {

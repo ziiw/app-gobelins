@@ -33,19 +33,25 @@ export default class Login extends React.Component {
     }
 
     componentDidMount() {
-        Utils.auth.login(null, null, (loggedIn) => {
-            if(loggedIn){
-                this.props.history.push("/home");
-            }else{
-                if(!window.firstStartDone){
-                    this.startSplashscreen();
-                }else{
-
-                    this.setAnims();
-                    this.animEntry();
-                }
-            }
-        })
+        if(!window.firstStartDone){
+            this.startSplashscreen();
+        }else{
+            this.setAnims();
+            this.animEntry();
+        }
+        // Utils.auth.login(null, null, (loggedIn) => {
+        //     console.log(loggedIn)
+        //     if(loggedIn){
+        //         this.props.history.push("/home");
+        //     }else{
+        //         if(!window.firstStartDone){
+        //             this.startSplashscreen();
+        //         }else{
+        //             this.setAnims();
+        //             this.animEntry();
+        //         }
+        //     }
+        // })
     }
 
     startSplashscreen() {
@@ -181,16 +187,22 @@ export default class Login extends React.Component {
             let email = this.refs.inputEmail.value
             let pass = this.refs.inputPass.value
 
-            Utils.auth.login(email, pass, (loggedIn) => {
-                if (!loggedIn){
-                    return this.setState({ error: true })
-                }
+            // Utils.auth.login(email, pass, (loggedIn) => {
+            //     if (!loggedIn){
+            //         return this.setState({ error: true })
+            //     }
 
-                this.props.history.push('/home')
-            })
+            //     this.props.history.push('/home')
+            // })
         }else{
-            // let email = this.refs.inputEmail.value
-            // let pass = this.refs.inputPass.value
+            let lastname = this.refs.inputLastname.value;
+            let firstname = this.refs.inputFirstname.value;
+            let email = this.refs.inputEmailSignUp.value;
+            let pass = this.refs.inputPassSignUp.value;
+
+            Utils.auth.signup(email, pass, {lastname: lastname, firstname: firstname}, (res) => {
+                
+            })
         }
     }
 
@@ -228,7 +240,6 @@ export default class Login extends React.Component {
                     <input ref="inputFirstname" type="text" disabled={!this.state.signUp} placeholder="PRÉNOM" />
                     <input ref="inputEmailSignUp" type="text" disabled={!this.state.signUp} placeholder="ADRESSE EMAIL" />
                     <input ref="inputPassSignUp" type="password" disabled={!this.state.signUp} placeholder="MOT DE PASSE" />
-                    
                 </div>
                 <div ref="btnForm" className="btnForm">
                     <div ref="btnCancel" className="btnCancel" onClick={handleBack}>RETOUR</div> 

@@ -602,6 +602,15 @@ body {
   color: #22378a;
   font-size: 14px;
 }
+#add {
+  padding-top: 80px;
+}
+#add input {
+  border: 1px solid #000;
+}
+#add button {
+  margin-top: 150px;
+}
 #profil .contentProfil {
   position: relative;
   top: 80px;

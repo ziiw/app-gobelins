@@ -16,14 +16,6 @@ import Menu from "../components/menu/menu"
 
 
 // -----------------------------
-// Models
-
-import JobMod from "../data/jobMod";
-
-
-
-
-// -----------------------------
 // Core
 
 export default class Layout extends React.Component {
@@ -56,6 +48,7 @@ export default class Layout extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
+        // Check if menu has to be open or not
         let currentPath = this.props.location.pathname;
         let prevPath = prevProps.location.pathname;
 
