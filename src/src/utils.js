@@ -9,60 +9,87 @@ PouchDB.plugin(require('pouchdb-authentication'));
 
 export let Utils = {
     
-    init: () => {
-        Utils.db = new PouchDB('http://127.0.0.1:5984/gobelins-app', {skipSetup: true});
-    },
-
     auth: {
         login: (email, pass) => {
             let db = new PouchDB('http://127.0.0.1:5984/gobelins-app', {skipSetup: true});
 
-            // db.login(email, pass, function (err, response) {
-            //     if (err) {
-            //         if (err.name === 'unauthorized') {
-            //             // name or password incorrect
-            //             console.warn("Credentials incorrect");
-            //         } else {
-            //             // cosmic rays, a meteor, etc.
-            //             console.warn("Connexion error");
-            //         }
-            //     }
-            //     console.log(response);
-            // });
-
-            return false;
+            return new Promise((resolve, reject) => {
+                db.login(email, pass)
+                    .then((response) => {
+                        if(response.ok){
+                            resolve(response)
+                        }
+                    })
+                    .catch((err) => {
+                        if (err.name === 'unauthorized') {
+                            // name or password incorrect
+                            reject("Credentials incorrect");
+                        } else {
+                            // cosmic rays, a meteor, etc.
+                            reject("Connexion error");
+                        }
+                    })
+            });
         },
 
         signup: (email, pass, data) => {
             let metadata = {
                 metadata: {
-                    lastname: data.lastname,
-                    firstname: data.firstname,
+                    lastname: data.metadata.lastname,
+                    firstname: data.metadata.firstname,
                     email: email,
-                    roles: "gobelins-app"
+                    roles: ["gobelins-app-user"]
                 }
             }
 
-            console.log(metadata)
-
             let db = new PouchDB('http://127.0.0.1:5984/gobelins-app', {skipSetup: true});
 
-            db.signup(email, pass, metadata, function (err, response) {
-                if (err) {
-                    if (err.name === 'conflict') {
-                        // "batman" already exists, choose another username
-                        console.warn("Already exists");
-                    } else if (err.name === 'forbidden') {
-                        // invalid username
-                        console.warn("Invalid username");
-                    } else {
-                        // HTTP error, cosmic rays, etc.
-                        console.warn("Http error");
-                    }
-                }
+            return new Promise( (resolve, reject) => {
+                db.signup(email, pass, metadata)
+                    .then((response) => {
+                        let id = data.metadata.firstname + data.metadata.lastname + Date.now();
 
-                console.log(response)
-            });
+                        let profil = {
+                            _id: id,
+                            lastname: data.metadata.lastname,
+                            firstname: data.metadata.firstname,
+                            location: data.metadata.location,
+                            promoType: data.metadata.promoType,
+                            promoYear: data.metadata.promoYear,
+                            description: "",
+                            job: data.metadata.job,
+                            website: data.metadata.portfolio,
+                            mail: email,
+                            phone: data.metadata.phone,
+                            picture: "../../assets/profil/default-profil-picture.png",
+                            works: [
+                                "../../assets/profil/work.png",
+                                "../../assets/profil/work.png",
+                                "../../assets/profil/work.png",
+                                "../../assets/profil/work.png",
+                                "../../assets/profil/work.png"
+                            ],
+                            type: "profil"
+                        }
+
+                        return db.put(profil)
+                    })
+                    .then((res) => {
+                        resolve(res);
+                    })
+                    .catch((err) => {
+                        if (err.name === 'conflict') {
+                            // "batman" already exists, choose another username
+                            reject("Already exists");
+                        } else if (err.name === 'forbidden') {
+                            // invalid username
+                            reject("Invalid username");
+                        } else {
+                            // HTTP error, cosmic rays, etc.
+                            reject("Http error / Error put");
+                        }
+                    })
+            })
         },
 
         loginOld: (email, pass, cb) => {

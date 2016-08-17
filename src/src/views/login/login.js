@@ -101,8 +101,13 @@ export default class Login extends React.Component {
     }
 
     setAnims() {
+        let disableButtons = () => {
+            this.refs.btnSignIn.style.display = "none";
+            this.refs.btnSignUp.style.display = "none";
+        }
+
         // Set signIn animation
-        this.tlSignIn = new TimelineMax({paused: true})
+        this.tlSignIn = new TimelineMax({paused: true, onComplete: disableButtons})
         this.tlSignIn
             .addLabel("btnSignIn")
             .addLabel("btnSignUp", "+0.25")
@@ -121,7 +126,7 @@ export default class Login extends React.Component {
         let listInputs = document.querySelectorAll(".signUpInput input");
 
         // Set signUp animation
-        this.tlSignUp = new TimelineMax({paused: true})
+        this.tlSignUp = new TimelineMax({paused: true, onComplete: disableButtons})
         this.tlSignUp
             .addLabel("logo")
             .addLabel("btnSignIn")
@@ -164,7 +169,6 @@ export default class Login extends React.Component {
     showSignUp() {
         this.setState({signUp: true, form: true, showLogo: true});
         this.tlSignUp.play();
-        // this.refs.login.style.height = this.refs.signUpInput.clientHeight + 200 + "px";
     }
 
     backMenu() {
@@ -177,6 +181,9 @@ export default class Login extends React.Component {
             this.tlSignUp.reverse() 
         }
 
+        this.refs.btnSignIn.style.display = "inline";
+        this.refs.btnSignUp.style.display = "inline";
+
         this.setState({signIn: false, signUp: false, form: false, showLogo: true});
     }
 
@@ -187,31 +194,38 @@ export default class Login extends React.Component {
             let email = this.refs.inputEmail.value
             let pass = this.refs.inputPass.value
 
-            // Utils.auth.login(email, pass, (loggedIn) => {
-            //     if (!loggedIn){
-            //         return this.setState({ error: true })
-            //     }
-
-            //     this.props.history.push('/home')
-            // })
+            Utils.auth.login(email, pass)
+                .then((res) => {
+                    this.props.history.push('/home')
+                })
+                .catch((err) => {
+                    this.setState({ error: true })
+                })
         }else{
-            let lastname = this.refs.inputLastname.value;
-            let firstname = this.refs.inputFirstname.value;
-            let email = this.refs.inputEmailSignUp.value;
-            let pass = this.refs.inputPassSignUp.value;
+            let metadata = {
+                lastname: this.refs.inputLastname.value,
+                firstname: this.refs.inputFirstname.value,
+                email: this.refs.inputEmailSignUp.value,
+                pass: this.refs.inputPassSignUp.value,
+                photo: this.refs.inputPhoto.value,
+                phone: this.refs.inputPhone.value,
+                promo: this.refs.inputPromo.value,
+                city: this.refs.inputCity.value,
+                job: this.refs.inputCity.value,
+                portfolio: this.refs.inputWeb.value
+            }
 
-            Utils.auth.signup(email, pass, {lastname: lastname, firstname: firstname}, (res) => {
-                
-            })
+            Utils.auth.signup(metadata.email, metadata.pass, {metadata: metadata})
+                .then((res) => {
+                    console.log(res)
+                    if(res.ok){
+                        this.props.history.push('/home');
+                    }else{
+
+                    }
+                })
         }
     }
-
-    // <input ref="inputPhoto" type="text" disabled={!this.state.signUp} placeholder="PHOTO" />
-    // <input ref="inputPhone" type="text" disabled={!this.state.signUp} placeholder="TÉLÉPHONE" />
-    // <input ref="inputPromo" type="text" disabled={!this.state.signUp} placeholder="FORMATION / PROMO" />
-    // <input ref="inputCity" type="text" disabled={!this.state.signUp} placeholder="VILLE" />
-    // <input ref="inputJob" type="text" disabled={!this.state.signUp} placeholder="MÉTIER" />
-    // <input ref="inputWeb" type="text" disabled={!this.state.signUp} placeholder="SITE WEB / BLOG" />
 
     render() {
         let handleSignIn = this.showSignIn.bind(this)
@@ -240,6 +254,12 @@ export default class Login extends React.Component {
                     <input ref="inputFirstname" type="text" disabled={!this.state.signUp} placeholder="PRÉNOM" />
                     <input ref="inputEmailSignUp" type="text" disabled={!this.state.signUp} placeholder="ADRESSE EMAIL" />
                     <input ref="inputPassSignUp" type="password" disabled={!this.state.signUp} placeholder="MOT DE PASSE" />
+                    <input ref="inputPhoto" type="text" disabled={!this.state.signUp} placeholder="PHOTO" />
+                    <input ref="inputPhone" type="text" disabled={!this.state.signUp} placeholder="TÉLÉPHONE" />
+                    <input ref="inputPromo" type="text" disabled={!this.state.signUp} placeholder="FORMATION / PROMO" />
+                    <input ref="inputCity" type="text" disabled={!this.state.signUp} placeholder="VILLE" />
+                    <input ref="inputJob" type="text" disabled={!this.state.signUp} placeholder="MÉTIER" />
+                    <input ref="inputWeb" type="text" disabled={!this.state.signUp} placeholder="SITE WEB / BLOG" />
                 </div>
                 <div ref="btnForm" className="btnForm">
                     <div ref="btnCancel" className="btnCancel" onClick={handleBack}>RETOUR</div> 
