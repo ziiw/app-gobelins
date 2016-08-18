@@ -10,6 +10,14 @@ import CanvasVideo from "canvasvideo.js";
 
 
 // -----------------------------
+// Managers
+
+import UserManager from "../../data/userManager"
+const UM = new UserManager();
+
+
+
+// -----------------------------
 // Globals
 
 let timerSplash = 0;
@@ -39,19 +47,6 @@ export default class Login extends React.Component {
             this.setAnims();
             this.animEntry();
         }
-        // Utils.auth.login(null, null, (loggedIn) => {
-        //     console.log(loggedIn)
-        //     if(loggedIn){
-        //         this.props.history.push("/home");
-        //     }else{
-        //         if(!window.firstStartDone){
-        //             this.startSplashscreen();
-        //         }else{
-        //             this.setAnims();
-        //             this.animEntry();
-        //         }
-        //     }
-        // })
     }
 
     startSplashscreen() {
@@ -194,7 +189,7 @@ export default class Login extends React.Component {
             let email = this.refs.inputEmail.value
             let pass = this.refs.inputPass.value
 
-            Utils.auth.login(email, pass)
+            UM.login(email, pass)
                 .then((res) => {
                     this.props.history.push('/home')
                 })
@@ -215,7 +210,7 @@ export default class Login extends React.Component {
                 portfolio: this.refs.inputWeb.value
             }
 
-            Utils.auth.signup(metadata.email, metadata.pass, {metadata: metadata})
+            UM.signup(metadata.email, metadata.pass, {metadata: metadata})
                 .then((res) => {
                     console.log(res)
                     if(res.ok){

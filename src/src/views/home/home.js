@@ -9,6 +9,14 @@ import Firebase from "firebase"
 
 
 // -----------------------------
+// Managers
+
+import UserManager from "../../data/userManager"
+const UM = new UserManager();
+
+
+
+// -----------------------------
 // Components
 
 import BarMenu from "../../components/barMenu/bar-menu.js"
@@ -30,6 +38,15 @@ export default class Home extends React.Component {
 	}
 
 	componentDidMount() {
+
+        // if not connected
+        UM.getCurrentUser().then((res) => {    
+            if(!res){
+                this.props.history.push('/');
+            }else{
+                console.log("🖖 Welcome " + res.userCtx.name)
+            }
+        })
         //  This method is called whxen an instance of this component is created.
         //this.firebaseRef = new Firebase("https://shining-torch-7702.firebaseio.com/");
         //

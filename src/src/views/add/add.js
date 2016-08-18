@@ -10,7 +10,8 @@ import { Router, Route, browserHistory, Link } from 'react-router';
 // -----------------------------
 // Models
 
-import JobMod from "../../data/jobMod";
+import JobManager from "../../data/jobManager";
+const JM = new JobManager();
 
 
 
@@ -33,11 +34,12 @@ export default class Add extends React.Component {
     componentDidMount() {
         //  This method is called whxen an instance of this component is created.
         // this.triggerAdd();
+
+        JM.getAll();
     }
 
     triggerAdd() {
-
-        let job = new JobMod({
+        JM.new({
             job: this.refs.job.value,
             firme: this.refs.firme.value,
             location: this.refs.location.value,
@@ -49,8 +51,6 @@ export default class Add extends React.Component {
             description: this.refs.description.value,
             author: "author" // pass from front (detect who is using by profil.getInfo())
         });
-        
-        job.persist();
     }
 
     render() {
