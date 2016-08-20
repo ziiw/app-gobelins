@@ -34,8 +34,6 @@ export default class Add extends React.Component {
     componentDidMount() {
         //  This method is called whxen an instance of this component is created.
         // this.triggerAdd();
-
-        JM.getAll();
     }
 
     triggerAdd() {

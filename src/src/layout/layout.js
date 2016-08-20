@@ -7,11 +7,22 @@ import { Router, Route, browserHistory, Link } from 'react-router'
 
 
 
+
+// -----------------------------
+// Managers
+
+import UserManager from "../data/userManager";
+const UM = new UserManager();
+
+
+
+
 // -----------------------------
 // Components
 
 import BarMenu from "../components/barMenu/bar-menu"
 import Menu from "../components/menu/menu"
+
 
 
 
@@ -40,6 +51,14 @@ export default class Layout extends React.Component {
         app.style.height = height;
 
         this.setBarMenu(this.props);
+
+        // Check login
+        UM.getCurrentUser()
+            .then((res) => {
+                if(!res){
+                    this.props.history.push('/');
+                }
+            })
     }
 
     componentWillReceiveProps(nextProps) {

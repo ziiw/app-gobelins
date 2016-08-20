@@ -11,7 +11,7 @@ import PouchDB from "pouchdb";
 export default class JobManager {
 
     constructor(data) {
-        this.db = new PouchDB('gobelins-app');
+        this.db = new PouchDB('http://127.0.0.1:5984/gobelins-app');
     }
 
     new(data) {
@@ -30,22 +30,15 @@ export default class JobManager {
             type: "job"
         }
 
-        this.db.info().then((info) => {
-            // Ready to use db
-            console.log(info, this);
+        let p1 = this.db.info();
+        let p2 = this.db.put(job);
+
+        Promise.all([p1, p2]).then((results) => {
+            console.log("👌 Job added !");
         })
     }
 
-    // ERROR: getting all docs. Secondary index not know
     getAll() {
-        const map = (doc) => {
-            if(doc.type == "job"){
-                emit(doc._id, doc);
-            }
-        }
-
-        this.db.query(map, {include_docs: true}).then((res) => {
-            console.log(res)
-        })
+        return this.db.query("job/all");
     }
 }
