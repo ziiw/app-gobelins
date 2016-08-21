@@ -54,6 +54,7 @@ export default class Home extends React.Component {
                 let ads = res.rows.map((ad, index) => {
                     return ad.value;
                 })
+                console.log("👌 Job get !");
                 this.setState({ads: ads})
             })
 

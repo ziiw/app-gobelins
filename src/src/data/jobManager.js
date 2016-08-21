@@ -11,7 +11,16 @@ import PouchDB from "pouchdb";
 export default class JobManager {
 
     constructor(data) {
-        this.db = new PouchDB('http://127.0.0.1:5984/gobelins-app');
+        let options = {
+            skipSetup: true,
+            ajax: {
+                headers: {
+                    'X-Hello': 'World'
+                }
+            }
+        }
+
+        this.db = new PouchDB('http://127.0.0.1:5984/gobelins-app', options);
     }
 
     new(data) {

@@ -12,14 +12,21 @@ PouchDB.plugin(require('pouchdb-authentication'));
 export default class UserManager {
 
     constructor() {
+        let options = {
+            skipSetup: true,
+            ajax: {
+                headers: {
+                    'X-Hello': 'World'
+                }
+            }
+        }
 
+        this.db = new PouchDB('http://127.0.0.1:5984/gobelins-app', options); 
     }
 
     login(email, pass) {
-        let db = new PouchDB('http://127.0.0.1:5984/gobelins-app', {skipSetup: true});
-
         return new Promise((resolve, reject) => {
-            db.login(email, pass)
+            this.db.login(email, pass, {ajax: {headers: {'X-Hello': 'World'}}})
                 .then((response) => {
                     if(response.ok){
                         resolve(response)
@@ -38,10 +45,8 @@ export default class UserManager {
     }
 
     getCurrentUser() {
-        let db = new PouchDB('http://127.0.0.1:5984/gobelins-app', {skipSetup: true});
-
         return new Promise( (resolve, reject) => {
-            db.getSession()
+            this.db.getSession()
                 .then((res) => {
                     if(!res.userCtx.name){
                         resolve(false)
@@ -56,10 +61,8 @@ export default class UserManager {
     }
 
     getUserById(id) {
-        let db = new PouchDB('http://127.0.0.1:5984/gobelins-app', {skipSetup: true});
-
         return new Promise( (resolve, reject) => {
-            db.get(id)
+            this.db.get(id)
                 .then((res) => {
                     if(!res.error){
                         resolve(res)
@@ -80,10 +83,8 @@ export default class UserManager {
             }
         }
 
-        let db = new PouchDB('http://127.0.0.1:5984/gobelins-app', {skipSetup: true});
-
         return new Promise( (resolve, reject) => {
-            db.signup(email, pass, metadata)
+            this.db.signup(email, pass, metadata)
                 .then((response) => {
                     let id = data.metadata.firstname + data.metadata.lastname + Date.now();
 

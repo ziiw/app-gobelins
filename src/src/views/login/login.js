@@ -60,7 +60,6 @@ export default class Login extends React.Component {
 
         // Options to canvas video (autoplay when buffer is ok) 
         let options = {
-            xhr: false,
             bufferTime: 6,
             audio: false,
             preload: true,
