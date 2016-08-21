@@ -38,7 +38,7 @@ export default class UserManager {
     }
 
     getCurrentUser() {
-         let db = new PouchDB('http://127.0.0.1:5984/gobelins-app', {skipSetup: true});
+        let db = new PouchDB('http://127.0.0.1:5984/gobelins-app', {skipSetup: true});
 
         return new Promise( (resolve, reject) => {
             db.getSession()
@@ -51,6 +51,21 @@ export default class UserManager {
                 })
                 .catch((err) => {
                     reject(err);
+                })
+        })
+    }
+
+    getUserById(id) {
+        let db = new PouchDB('http://127.0.0.1:5984/gobelins-app', {skipSetup: true});
+
+        return new Promise( (resolve, reject) => {
+            db.get(id)
+                .then((res) => {
+                    if(!res.error){
+                        resolve(res)
+                    }else{
+                        reject(res);
+                    }
                 })
         })
     }

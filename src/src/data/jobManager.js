@@ -41,4 +41,8 @@ export default class JobManager {
     getAll() {
         return this.db.query("job/all");
     }
+
+    getById(id) {
+        return this.db.get(id);
+    }
 }

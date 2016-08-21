@@ -26,9 +26,9 @@ export default class Ad extends React.Component {
             <div className="ad">
                 <div className="shadow"></div>
                 <div className="informations">
-                    <div className="jobTitle">{this.props.data.jobTitle}</div>
-                    <div className="enterprise">{this.props.data.enterprise}</div>
-                    <div className="localisation">{this.props.data.localisation}</div>
+                    <div className="jobTitle">{this.props.data.job}</div>
+                    <div className="enterprise">{this.props.data.firme}</div>
+                    <div className="localisation">{this.props.data.location}</div>
                 </div>
             </div>
         );

@@ -43,6 +43,14 @@ export default class Layout extends React.Component {
     }
 
     componentDidMount() {
+        // Check login
+        UM.getCurrentUser()
+            .then((res) => {
+                if(!res || res.error){
+                    this.props.history.push('/');
+                }
+            })
+
         let width = window.innerWidth;
         let height = window.innerHeight;
 
@@ -51,14 +59,6 @@ export default class Layout extends React.Component {
         app.style.height = height;
 
         this.setBarMenu(this.props);
-
-        // Check login
-        UM.getCurrentUser()
-            .then((res) => {
-                if(!res){
-                    this.props.history.push('/');
-                }
-            })
     }
 
     componentWillReceiveProps(nextProps) {
@@ -100,6 +100,9 @@ export default class Layout extends React.Component {
                 break;
             case "profil/:id":
                 this.setState({title: "Profil", menu: true, showNav: true});
+                break;
+            default: 
+                this.setState({title: "Profil", menu: true, showNav: false});
                 break;
         }
     }
