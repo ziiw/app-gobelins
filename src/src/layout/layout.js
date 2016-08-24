@@ -63,6 +63,15 @@ export default class Layout extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         // Each change of route
+        if(nextProps.route.path != "/"){
+            UM.getCurrentUser()
+                .then((res) => {
+                    if(!res || res.error){
+                        this.props.history.push('/');
+                    }
+                })
+        }
+
         this.setBarMenu(nextProps);
     }
 
@@ -92,7 +101,7 @@ export default class Layout extends React.Component {
             case "events":
                 this.setState({title: "Évènements", menu: true, showNav: true});
                 break;
-            case "events/:id":
+            case "event/:id":
                 this.setState({title: "Évènements", menu: false, showNav: true});
                 break;
             case "search":

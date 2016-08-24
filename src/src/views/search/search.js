@@ -4,7 +4,7 @@
 import {Utils as Utils} from "../../utils"
 import React from "react"
 import { Router, Route, browserHistory, Link } from 'react-router'
-import Firebase from "firebase"
+
 
 
 
@@ -12,6 +12,14 @@ import Firebase from "firebase"
 // Components
 
 import BarMenu from "../../components/barMenu/bar-menu.js"
+
+
+
+// -----------------------------
+// Managers
+
+import UserManager from "../../data/userManager"
+const UM = new UserManager();
 
 
 
@@ -25,32 +33,81 @@ export default class Search extends React.Component {
 
         this.state = {
             selected: "",
+            choice: [],
             job: [],
             city: [],
             cursus: [],
             promo: [],
-            name: []
+            name: [],
+            lists: {
+                job: [],
+                city: [],
+                cursus: [],
+                promo: [],
+                names: []
+            }
         }
 	}
 
 	componentDidMount() {
-        //  This method is called whxen an instance of this component is created.
-        //this.firebaseRef = new Firebase("https://shining-torch-7702.firebaseio.com/");
-        //
-        //this.firebaseRef.on("child_added", function(dataSnapshot) {
-        //    this.ads.push(dataSnapshot.val())
-        //    this.setState({
-        //        ads: this.ads
-        //    })
-        //}.bind(this))
+        let lists = {
+            job: [],
+            city: [],
+            cursus: [],
+            promo: [],
+            names: []
+        };
+
+        UM.getAll().then((res) => {
+            res.rows.map((resp, index) => {
+                let user = resp.value;
+
+                if(lists.job.indexOf(user.job) == -1)
+                    lists.job.push(user.job);
+
+                if(lists.city.indexOf(user.location) == -1)
+                    lists.city.push(user.location);
+
+                if(lists.cursus.indexOf(user.promoType) == -1)
+                    lists.cursus.push(user.promoType);
+
+                if(lists.promo.indexOf(user.promoYear) == -1)
+                    lists.promo.push(user.promoYear);
+
+                lists.names.push(user.lastname + " " + user.firstname);
+            })
+
+            this.setState({lists: lists});
+        })
     }
 
     triggerCat(cat) {
         let that = this;
 
-        this.setState({
-            selected: cat
-        });
+        let choice;
+
+        switch(cat){
+            case "job":
+                choice = this.state.lists.job;
+                break;
+            case "city":
+                choice = this.state.lists.city;
+                break;
+            case "cursus":
+                choice = this.state.lists.cursus;
+                break;
+            case "promo":
+                choice = this.state.lists.promo;
+                break;
+            case "name":
+                choice = this.state.lists.names;
+                break;
+        }
+
+        if(choice.indexOf("< Back") == -1)
+            choice.unshift("< Back");
+
+        this.setState({selected: cat, choice: choice});
 
         TweenMax.to(this.refs.cat, 0.25, {
             x: -15,
@@ -73,6 +130,10 @@ export default class Search extends React.Component {
     triggerChoice(choice){
         let that = this;
 
+        if(choice == "< Back"){
+            choice = "";
+        }
+
         switch(this.state.selected){
             case "job":
                 this.setState({job: choice});
@@ -85,6 +146,9 @@ export default class Search extends React.Component {
                 break;
             case "promo":
                 this.setState({promo: choice});
+                break;
+            case "name":
+                this.setState({name: choice});
                 break;
         }
 
@@ -110,12 +174,11 @@ export default class Search extends React.Component {
         //this.firebaseRef.off();
     }
 
-  	render() {
-        let choices = [2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016];
+    render() {
         let that = this;
 
-    	return (
-    		<div id="search">
+        return (
+            <div id="search">
                 <div className="filters">
                     <h2>Filtrer la recherche</h2>
                     <ul className="categories" ref="cat">
@@ -127,7 +190,7 @@ export default class Search extends React.Component {
                     </ul>
 
                     <ul className="choice" ref="choice">
-                        {choices.map(function(item, id){
+                        {this.state.choice.map(function(item, id){
                             return <li key={id} onClick={that.triggerChoice.bind(that, item)}><p className="left">{item}</p></li>
                         })}
                     </ul>

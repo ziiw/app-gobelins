@@ -685,13 +685,9 @@ body {
   font-family: "Montserrat-Bold";
   color: #22378a;
   margin-bottom: 20px;
-  height: 2px;
-  background: #22378a;
-  margin-bottom: 20px;
-  margin-top: 20px;
 }
 #event .eventComp {
-  margin-top: 65px;
+  margin-top: 80px;
 }
 #event .eventInfos {
   padding-right: 20px;
@@ -707,14 +703,18 @@ body {
 #event color black .sep {
   width: 100%;
 }
+#event height 2px {
+  background: #22378a;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
 #search {
   background-color: #fff;
 }
 #search .filters {
-  padding-top: 1px;
+  padding-top: 135px;
   padding-left: 20px;
   padding-right: 20px;
-  padding-bottom: 85px;
 }
 #search .filters h2 {
   position: fixed;
@@ -734,7 +734,6 @@ body {
 }
 #search .filters ul {
   position: relative;
-  margin-top: 135px;
   width: 100%;
   padding-bottom: 115px;
   z-index: 700;
@@ -745,6 +744,12 @@ body {
   left: 15px;
   text-align: left;
   z-index: 800;
+}
+#search .filters ul.choice li:first-child {
+  height: 40px;
+  line-height: 40px;
+  font-family: Montserrat-Bold;
+  font-size: 13px;
 }
 #search .filters ul li {
   width: 100%;
@@ -777,3 +782,4 @@ body {
   font-family: "Montserrat-Bold";
   z-index: 1001;
 }
+/*# sourceMappingURL=style.css.map */

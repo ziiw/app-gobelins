@@ -12,6 +12,7 @@ PouchDB.plugin(require('pouchdb-authentication'));
 export default class UserManager {
 
     constructor() {
+        // Fix bug relative to Chrome v52, no header
         let options = {
             skipSetup: true,
             ajax: {
@@ -71,6 +72,10 @@ export default class UserManager {
                     }
                 })
         })
+    }
+
+    getAll() {
+        return this.db.query("profil/all");
     }
 
     signup(email, pass, data) {
