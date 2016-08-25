@@ -24,6 +24,13 @@ const UM = new UserManager();
 
 
 // -----------------------------
+// Globals
+
+let users = [];
+
+
+
+// -----------------------------
 // Core
 
 export default class Search extends React.Component {
@@ -32,13 +39,14 @@ export default class Search extends React.Component {
 		super(props)
 
         this.state = {
+            total: 1,
             selected: "",
             choice: [],
-            job: [],
-            city: [],
-            cursus: [],
-            promo: [],
-            name: [],
+            job: "",
+            city: "",
+            cursus: "",
+            promo: "",
+            name: "",
             lists: {
                 job: [],
                 city: [],
@@ -62,6 +70,9 @@ export default class Search extends React.Component {
             res.rows.map((resp, index) => {
                 let user = resp.value;
 
+                // Store all users for later
+                users.push(user);
+
                 if(lists.job.indexOf(user.job) == -1)
                     lists.job.push(user.job);
 
@@ -76,6 +87,12 @@ export default class Search extends React.Component {
 
                 lists.names.push(user.lastname + " " + user.firstname);
             })
+
+            lists.job.sort();
+            lists.city.sort();
+            lists.cursus.sort();
+            lists.promo.sort();
+            lists.names.sort();
 
             this.setState({lists: lists});
         })
@@ -170,12 +187,56 @@ export default class Search extends React.Component {
         });
     }
 
+    triggerSearch() {
+        let response = this.filterUsers();
+        console.log(response)
+    }
+
+    filterUsers(){
+        let res = users;
+
+        if(this.state.job != ""){
+            res = res.filter((user, index) => {
+                return (user.job == this.state.job) ? true : false;
+            })
+        }
+
+        if(this.state.city != ""){
+            res = res.filter((user, index) => {
+                return (user.location == this.state.city) ? true : false;
+            })
+        }
+
+        if(this.state.cursus != ""){
+            res = res.filter((user, index) => {
+                return (user.promoType == this.state.cursus) ? true : false;
+            })
+        }
+
+        if(this.state.promo != ""){
+            res = res.filter((user, index) => {
+                return (user.promoYear == this.state.promo) ? true : false;
+            })
+        }
+
+        if(this.state.name != ""){
+            res = res.filter((user, index) => {
+                let name = user.lastname + " " + user.firstname;
+                return (name == this.state.name) ? true : false;
+            })
+        }
+
+        return res;
+    }
+
     componentWillUnmount() {
         //this.firebaseRef.off();
     }
 
     render() {
         let that = this;
+
+        let totalClass = (this.state.total > 0) ? "total" : "total hide";
 
         return (
             <div id="search">
@@ -197,7 +258,10 @@ export default class Search extends React.Component {
                     <div className="clear"></div>
                 </div>
 
-                <div className="submit">Rechercher</div>
+                <div className="submit" onClick={this.triggerSearch.bind(this)}>
+                    Rechercher <br/>
+                    <span className={totalClass}>{this.state.total} resultat(s)</span>
+                </div>
       		</div>
     	);
   	}

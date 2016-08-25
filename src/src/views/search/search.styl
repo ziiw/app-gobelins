@@ -1,5 +1,6 @@
 #search
 	background-color #fff
+	min-height 100vh
 	
 	.filters
 		padding-top 135px
@@ -37,11 +38,22 @@
 				text-align left
 				z-index 800
 				
-				li:first-child
-					height 40px
-					line-height 40px
-					font-family Montserrat-Bold
-					font-size 13px
+				li
+					p
+						&.left
+							width 100%
+							float left
+						&.right
+							width 0%
+							float right
+							text-align right
+							font-weight bold
+				
+					&:first-child
+						height 40px
+						line-height 40px
+						font-family Montserrat-Bold
+						font-size 13px
 			
 			li
 				width 100%
@@ -52,13 +64,14 @@
 				text-transform uppercase
 				
 				p
-					width 50%
-					
 					&.left
+						width 30%
 						float left
 					&.right
+						width 70%
 						float right
 						text-align right
+						font-weight bold
 		
 	
 	.submit
@@ -73,3 +86,11 @@
 		text-transform uppercase
 		font-family "Montserrat-Bold"
 		z-index 1001
+		
+		.total
+			opacity 1
+			font-size 12px
+			font-family "Montserrat-Light"
+			
+			&.hide
+				opacity 0

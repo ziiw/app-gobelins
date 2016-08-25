@@ -710,6 +710,7 @@ body {
 }
 #search {
   background-color: #fff;
+  min-height: 100vh;
 }
 #search .filters {
   padding-top: 135px;
@@ -745,6 +746,16 @@ body {
   text-align: left;
   z-index: 800;
 }
+#search .filters ul.choice li p.left {
+  width: 100%;
+  float: left;
+}
+#search .filters ul.choice li p.right {
+  width: 0%;
+  float: right;
+  text-align: right;
+  font-weight: bold;
+}
 #search .filters ul.choice li:first-child {
   height: 40px;
   line-height: 40px;
@@ -759,15 +770,15 @@ body {
   border-bottom: 2px solid #ddd;
   text-transform: uppercase;
 }
-#search .filters ul li p {
-  width: 50%;
-}
 #search .filters ul li p.left {
+  width: 30%;
   float: left;
 }
 #search .filters ul li p.right {
+  width: 70%;
   float: right;
   text-align: right;
+  font-weight: bold;
 }
 #search .submit {
   position: fixed;
@@ -782,4 +793,11 @@ body {
   font-family: "Montserrat-Bold";
   z-index: 1001;
 }
-/*# sourceMappingURL=style.css.map */
+#search .submit .total {
+  opacity: 1;
+  font-size: 12px;
+  font-family: "Montserrat-Light";
+}
+#search .submit .total.hide {
+  opacity: 0;
+}
