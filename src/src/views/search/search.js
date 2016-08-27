@@ -9,13 +9,6 @@ import { Router, Route, browserHistory, Link } from 'react-router'
 
 
 // -----------------------------
-// Components
-
-import BarMenu from "../../components/barMenu/bar-menu.js"
-
-
-
-// -----------------------------
 // Managers
 
 import UserManager from "../../data/userManager"
@@ -39,7 +32,7 @@ export default class Search extends React.Component {
 		super(props)
 
         this.state = {
-            total: 1,
+            total: 0,
             selected: "",
             choice: [],
             job: "",
@@ -94,7 +87,7 @@ export default class Search extends React.Component {
             lists.promo.sort();
             lists.names.sort();
 
-            this.setState({lists: lists});
+            this.setState({lists: lists, total: users.length});
         })
     }
 
@@ -153,21 +146,25 @@ export default class Search extends React.Component {
 
         switch(this.state.selected){
             case "job":
-                this.setState({job: choice});
+                this.state.job = choice 
                 break;
             case "city":
-                this.setState({city: choice});
+                this.state.city = choice 
                 break;
             case "cursus":
-                this.setState({cursus: choice});
+                this.state.cursus = choice 
                 break;
             case "promo":
-                this.setState({promo: choice});
+                this.state.promo = choice 
                 break;
             case "name":
-                this.setState({name: choice});
+                this.state.name = choice 
                 break;
         }
+
+        this.forceUpdate(() => {
+            that.majTotal();
+        })
 
         TweenMax.to(this.refs.choice, 0.25, {
             x: 15,
@@ -189,7 +186,12 @@ export default class Search extends React.Component {
 
     triggerSearch() {
         let response = this.filterUsers();
-        console.log(response)
+        console.log(response);
+    }
+
+    majTotal() {
+        let total = this.filterUsers();
+        this.setState({total: total});
     }
 
     filterUsers(){
@@ -236,7 +238,7 @@ export default class Search extends React.Component {
     render() {
         let that = this;
 
-        let totalClass = (this.state.total > 0) ? "total" : "total hide";
+        // let totalClass = (this.state.choice.length > 0) ? "total" : "total hide";
 
         return (
             <div id="search">
@@ -258,10 +260,12 @@ export default class Search extends React.Component {
                     <div className="clear"></div>
                 </div>
 
-                <div className="submit" onClick={this.triggerSearch.bind(this)}>
-                    Rechercher <br/>
-                    <span className={totalClass}>{this.state.total} resultat(s)</span>
-                </div>
+                <Link to="result/" query={{ response: JSON.stringify(this.state.total) }}>
+                    <div className="submit" onClick={this.triggerSearch.bind(this)}>
+                        Rechercher <br/>
+                        <span className="total">{this.state.total.length} resultat(s)</span>
+                    </div>
+                </Link>
       		</div>
     	);
   	}
