@@ -27,6 +27,7 @@ import Profil from './views/profil/profil';
 import Events from './views/events/events';
 import Event from './views/events/event';
 import Search from './views/search/search';
+import Result from './views/result/result';
 
 
 
@@ -61,6 +62,8 @@ export default class Root extends React.Component {
                     <Route path="event/:id" component={Event}/>
 
                     <Route path="search" component={Search}/>
+
+                    <Route path="result/" component={Result}/>
                 </Route>
             </Router>
         );
