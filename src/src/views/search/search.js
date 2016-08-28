@@ -87,7 +87,7 @@ export default class Search extends React.Component {
             lists.promo.sort();
             lists.names.sort();
 
-            this.setState({lists: lists, total: users.length});
+            this.setState({lists: lists, total: users});
         })
     }
 
@@ -184,11 +184,6 @@ export default class Search extends React.Component {
         });
     }
 
-    triggerSearch() {
-        let response = this.filterUsers();
-        console.log(response);
-    }
-
     majTotal() {
         let total = this.filterUsers();
         this.setState({total: total});
@@ -233,12 +228,14 @@ export default class Search extends React.Component {
 
     componentWillUnmount() {
         //this.firebaseRef.off();
+        users = [];
     }
 
     render() {
         let that = this;
 
-        // let totalClass = (this.state.choice.length > 0) ? "total" : "total hide";
+        let resultat = (this.state.total.length > 1) ? "profils" : "profil";
+        let searchClass = (this.state.total.length > 0) ? "" : "disabled-link";
 
         return (
             <div id="search">
@@ -260,10 +257,10 @@ export default class Search extends React.Component {
                     <div className="clear"></div>
                 </div>
 
-                <Link to="result/" query={{ response: JSON.stringify(this.state.total) }}>
-                    <div className="submit" onClick={this.triggerSearch.bind(this)}>
+                <Link to="result/" className={searchClass} query={{ response: JSON.stringify(this.state.total) }}>
+                    <div className="submit">
                         Rechercher <br/>
-                        <span className="total">{this.state.total.length} resultat(s)</span>
+                        <span className="total">{this.state.total.length} {resultat}</span>
                     </div>
                 </Link>
       		</div>

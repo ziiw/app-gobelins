@@ -73,13 +73,20 @@
 						text-align right
 						font-weight bold
 		
-	
+	.disabled-link
+		pointer-events none
+		
+		.submit
+			transition 0.25s background
+			background grey
+		
 	.submit
 		position fixed
 		bottom 0px
 		width 100%
 		height 60px
 		background blue
+		transition 0.25s background
 		text-align center
 		line-height 55px
 		color white
