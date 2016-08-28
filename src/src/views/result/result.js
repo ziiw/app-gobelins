@@ -62,7 +62,7 @@ export default class Result extends React.Component {
             <div id="result">
                 <ul>
                     {this.state.users.map(function(item, id) {
-                        return <Link key={id} to="profil/" query={{id: item._id}}>
+                        return <Link key={id} to="profil/" query={{id: item._id, result: true}}>
                                     <li>
                                         <div className="visuel"></div>
                                         <div className="infos">

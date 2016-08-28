@@ -40,15 +40,6 @@ export default class Home extends React.Component {
 
 	componentDidMount() {
 
-        // if not connected
-        UM.getCurrentUser().then((res) => {
-            if(!res){
-                this.props.history.push('/');
-            }else{
-                console.log("🖖 Welcome " + res.userCtx.name)
-            }
-        })
-
         JM.getAll()
             .then((res) => {
                 let ads = res.rows.map((ad, index) => {
