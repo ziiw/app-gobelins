@@ -48,6 +48,8 @@ export default class Layout extends React.Component {
             .then((res) => {
                 if(!res || res.error){
                     this.props.history.push('/');
+                }else{
+                    console.log("🖖 Welcome " + res.userCtx.name)
                 }
             })
 
@@ -108,10 +110,15 @@ export default class Layout extends React.Component {
                 this.setState({title: "Annuaire", menu: true, showNav: true});
                 break;
             case "profil/":
-                this.setState({title: "Profil", menu: true, showNav: true});
+                // Check the provenance
+                if(nextProps.location.query.result){
+                    this.setState({title: "Annuaire", menu: false, showNav: true});
+                }else{
+                    this.setState({title: "Profil", menu: true, showNav: true});
+                }
                 break;
             case "result/":
-                this.setState({title: "Résultat", menu: false, showNav: true});
+                this.setState({title: "Annuaire", menu: false, showNav: true});
                 break;
             default: 
                 this.setState({title: "Profil", menu: true, showNav: false});

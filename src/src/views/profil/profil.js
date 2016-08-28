@@ -32,9 +32,9 @@ export default class Profil extends React.Component {
 
     componentDidMount() {
         let id = this.props.location.query.id;
+
         UM.getUserById(id).then((res) => {
             this.setState({user: res})
-            console.log(res)
         })
 
         // this.setState({
@@ -75,7 +75,7 @@ export default class Profil extends React.Component {
                             <li>{this.state.user.job}</li>
                             <li>{this.state.user.location}</li>
                             <li className="line"></li>
-                            <li>{this.state.user.promoYear}</li>
+                            <li>{this.state.user.promoType} {this.state.user.promoYear}</li>
                         </ul>
                     </header>
 
