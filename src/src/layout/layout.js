@@ -107,7 +107,7 @@ export default class Layout extends React.Component {
             case "search":
                 this.setState({title: "Annuaire", menu: true, showNav: true});
                 break;
-            case "profil/:id":
+            case "profil/":
                 this.setState({title: "Profil", menu: true, showNav: true});
                 break;
             case "result/":

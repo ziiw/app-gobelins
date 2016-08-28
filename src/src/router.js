@@ -56,7 +56,7 @@ export default class Root extends React.Component {
 
                     <Route path="add" component={Add}/>
 
-                    <Route path="profil/:id" component={Profil}/>
+                    <Route path="profil/" component={Profil}/>
 
                     <Route path="events" component={Events}/>
                     <Route path="event/:id" component={Event}/>
